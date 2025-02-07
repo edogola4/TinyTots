@@ -9,7 +9,7 @@ export const addCart = (product) =>{
 // For Delete Item to Cart
 export const delCart = (product) =>{
     return {
-        type:"DELITEM",
+        type:"DELETEITEM",
         payload:product
     }
 }
