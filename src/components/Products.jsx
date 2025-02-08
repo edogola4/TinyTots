@@ -1,146 +1,3 @@
-/*import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { useDispatch } from "react-redux";
-import { addCart } from "../redux/action";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import { Link } from "react-router-dom";
-import toast from "react-hot-toast";
-import { FaShoppingCart, FaArrowRight } from "react-icons/fa";
-
-const Products = () => {
-  const [data, setData] = useState([]);
-  const [activeCat, setActiveCat] = useState("All");
-  const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-
-  const addProduct = useCallback((product) => {
-    dispatch(addCart(product));
-    toast.success("Added to cart");
-  }, [dispatch]);
-
-  useEffect(() => {
-    let isMounted = true;
-    const getProducts = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch("https://fakestoreapi.com/products/");
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
-        }
-        const products = await response.json();
-        if (isMounted) {
-          setData(products);
-          setLoading(false);
-        }
-      } catch (error) {
-        console.error("Error fetching products:", error);
-        if (isMounted) setLoading(false);
-      }
-    };
-    getProducts();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  const filteredProducts = useMemo(() => {
-    if (activeCat === "All") return data;
-    return data.filter((item) => item.category === activeCat);
-  }, [data, activeCat]);
-
-  const handleFilter = useCallback((cat) => {
-    setActiveCat(cat);
-  }, []);
-
-  const Loading = () => (
-    <>
-      <div className="col-12 py-5 text-center">
-        <Skeleton height={40} width={560} />
-      </div>
-      {[...Array(6)].map((_, i) => (
-        <div key={i} className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
-          <Skeleton height={592} />
-        </div>
-      ))}
-    </>
-  );
-
-  const ShowProducts = () => (
-    <>
-      <div className="buttons text-center py-5">
-        {["All", "men's clothing", "women's clothing", "jewelery", "electronics"].map((cat) => (
-          <button
-            key={cat}
-            className={`btn btn-outline-dark btn-sm m-2 ${activeCat === cat ? "active" : ""}`}
-            onClick={() => handleFilter(cat)}
-          >
-            {cat === "All" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
-          </button>
-        ))}
-      </div>
-      <div className="row">
-        {filteredProducts.map((product) => (
-          <div key={product.id} className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
-            <div className="card text-center h-100 modern-card">
-              <img
-                className="card-img-top p-3"
-                src={product.image}
-                alt={product.title || "Product image"}
-                height={300}
-              />
-              <div className="card-body">
-                <h5 className="card-title">
-                  {product.title.substring(0, 12)}...
-                </h5>
-                <p className="card-text">
-                  {product.description.substring(0, 90)}...
-                </p>
-              </div>
-              <ul className="list-group list-group-flush">
-                <li className="list-group-item lead">$ {product.price}</li>
-              </ul>
-              <div className="card-body modern-card-footer">
-                <Link
-                  to={`/product/${product.id}`}
-                  className="btn btn-dark m-1"
-                >
-                  Buy Now <FaArrowRight />
-                </Link>
-                <button
-                  className="btn btn-dark m-1"
-                  onClick={() => addProduct(product)}
-                >
-                  <FaShoppingCart /> Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-
-  return (
-    <div className="container my-3 py-3">
-      <div className="row">
-        <div className="col-12">
-          <h2 className="display-5 text-center">Latest Products</h2>
-          <p className="lead text-center">
-            Browse our curated collection of must-have items!
-          </p>
-          <hr />
-        </div>
-      </div>
-      <div className="row justify-content-center">
-        {loading ? <Loading /> : <ShowProducts />}
-      </div>
-    </div>
-  );
-};
-
-export default Products;
-*/
-
 
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
@@ -296,9 +153,9 @@ const Products = () => {
     >
       <Header>
         <Greeting>{getGreeting()}</Greeting>
-        <Title>Latest Products 🧸</Title>
+        <Title>Curated Comfort 🧸 </Title>
         <SubTitle>
-          Browse our curated collection of must-have items, sustainably styled for your little one!
+        Discover eco-friendly essentials for your little one's adventures 🌱
         </SubTitle>
       </Header>
       {loading ? <LoadingSkeleton /> : <ShowProducts />}
@@ -343,6 +200,7 @@ const SubTitle = styled(motion.p)`
   color: #333;
   max-width: 800px;
   margin: 0 auto;
+  line-height: 1.6;
 `;
 
 const FilterContainer = styled(motion.div)`
@@ -355,7 +213,7 @@ const FilterContainer = styled(motion.div)`
 const FilterButton = styled(motion.button)`
   background: rgba(255, 255, 255, 0.7);
   border: none;
-  padding: 0.6rem 1.2rem;
+  padding: 0.8rem 1.2rem;
   margin: 0.5rem;
   font-size: 0.9rem;
   font-weight: 600;
@@ -378,13 +236,13 @@ const FilterButton = styled(motion.button)`
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
   padding: 1rem;
 `;
 
 const ProductCard = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.35);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 16px;
@@ -423,6 +281,7 @@ const ProductTitle = styled.h5`
 const ProductDescription = styled.p`
   font-size: 0.9rem;
   color: #444;
+  margin-bottom: 1rem;
 `;
 
 const PriceTag = styled.div`
@@ -435,7 +294,10 @@ const PriceTag = styled.div`
 
 const CardFooter = styled.div`
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-evenly;
+  align-items: center;
   padding: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.3);
 `;
@@ -443,19 +305,21 @@ const CardFooter = styled.div`
 const StyledLink = styled(motion(Link))`
   text-decoration: none;
   background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   border-radius: 8px;
   color: #fff;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  flex: 1;
+  justify-content: center;
 `;
 
 const StyledButton = styled(motion.button)`
   background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   border-radius: 8px;
   color: #fff;
   font-weight: 600;
@@ -463,6 +327,8 @@ const StyledButton = styled(motion.button)`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  flex: 1;
+  justify-content: center;
 `;
 
 const SkeletonWrapper = styled.div`
@@ -472,3 +338,7 @@ const SkeletonWrapper = styled.div`
 const SkeletonCard = styled.div`
   margin-bottom: 2rem;
 `;
+
+
+
+
