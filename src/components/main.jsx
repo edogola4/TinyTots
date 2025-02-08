@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import Loading from "./Loading";
 import logoWhite from "../assets/logo_white.jpg";
+//import Typed from "react-typed";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -197,3 +198,5 @@ const CtaButton = styled(motion.button)`
 `;
 
 export default Home;
+
+
