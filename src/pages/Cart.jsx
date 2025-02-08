@@ -395,7 +395,7 @@ const Cart = () => {
                       </RemoveButton>
                     </ItemQuantity>
                     <ItemPrice>
-                      {item.qty} x KSH{item.price}
+                      {item.qty} x KSH {item.price}
                     </ItemPrice>
                   </ItemDetails>
                 </CartItem>
@@ -407,15 +407,15 @@ const Cart = () => {
                 <SummaryTitle>Order Summary</SummaryTitle>
                 <SummaryItem>
                   <span>Products ({totalItems})</span>
-                  <span>KSH{Math.round(subtotal)}</span>
+                  <span>KSH {Math.round(subtotal)}</span>
                 </SummaryItem>
                 <SummaryItem>
                   <span>Shipping</span>
-                  <span>KSH{shipping}</span>
+                  <span>KSH {shipping}</span>
                 </SummaryItem>
                 <SummaryTotal>
                   <span>Total Amount</span>
-                  <span>KSH{Math.round(subtotal + shipping)}</span>
+                  <span>KSH {Math.round(subtotal + shipping)}</span>
                 </SummaryTotal>
                 <CheckoutButton to="/checkout">
                   Go to Checkout

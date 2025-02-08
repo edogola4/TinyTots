@@ -93,15 +93,15 @@ const Cart = () => {
                 <SummaryTitle>Order Summary</SummaryTitle>
                 <SummaryItem>
                   <span>Products ({totalItems})</span>
-                  <span>KSH{Math.round(subtotal)}</span>
+                  <span>KSH {Math.round(subtotal)}</span>
                 </SummaryItem>
                 <SummaryItem>
                   <span>Shipping</span>
-                  <span>KSH{shipping}</span>
+                  <span>KSH {shipping}</span>
                 </SummaryItem>
                 <SummaryTotal>
                   <span>Total Amount</span>
-                  <span>KSH{Math.round(subtotal + shipping)}</span>
+                  <span>KSH {Math.round(subtotal + shipping)}</span>
                 </SummaryTotal>
                 <CheckoutButton to="/checkout">
                   Go to Checkout

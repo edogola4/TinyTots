@@ -121,7 +121,7 @@ const Products = () => {
                 {product.description.substring(0, 90)}...
               </ProductDescription>
             </CardContent>
-            <PriceTag>$ {product.price}</PriceTag>
+            <PriceTag>KSH {product.price}</PriceTag>
             <CardFooter>
               <StyledLink
                 to={`/product/${product.id}`}
