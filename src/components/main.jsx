@@ -3,10 +3,14 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import Loading from "./Loading";
+import logoWhite from "./assets/logo_white.jpg";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
+
+
+<ParallaxImage src={logoWhite} alt="Modern Fashion Collection" />
 
   // Update loading state
   useEffect(() => {
