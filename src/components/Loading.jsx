@@ -88,6 +88,7 @@ const spin = keyframes`
   100% { transform: rotate(360deg); }
 `;
 
+// eslint-disable-next-line no-unused-vars
 const fadeInAndHold = keyframes`
   0% { opacity: 0; transform: translateY(20px); }
   100% { opacity: 1; transform: translateY(0); }

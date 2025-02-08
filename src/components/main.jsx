@@ -14,8 +14,8 @@ const Home = () => {
 
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return "Rise & Shine ✨";
-    if (hour < 18) return "Afternoon Glow ☀️";
+    if (hour < 18) return "Rise & Shine ✨";
+    if (hour < 12) return "Afternoon Glow ☀️";
     return "Evening Elegance 🌙";
   };
 

@@ -167,6 +167,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+// eslint-disable-next-line no-unused-vars
 import { FiShoppingCart, FiLogIn, FiUserPlus, FiMenu, FiX } from 'react-icons/fi';
 
 const NavBar = styled.nav`
