@@ -341,4 +341,3 @@ const SkeletonCard = styled.div`
 
 
 
-
