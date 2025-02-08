@@ -106,201 +106,207 @@ const ContactPage = () => {
 
 export default ContactPage;
 */
-
 import React, { useState } from "react";
 import { Footer, Navbar } from "../components";
+import styled from "styled-components";
 import { motion } from "framer-motion";
-import { EnvelopeIcon, PhoneArrowDownRightIcon } from "@heroicons/react/24/outline";
-import { Twitter, GitHub, Mail } from "react-icons/fa";
 
 const ContactPage = () => {
+  // Local state for managing form input and submission feedback
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
-  const [status, setStatus] = useState({ submitting: false, success: false, error: null });
+  const [submitted, setSubmitted] = useState(false);
 
+  // Handler for input changes
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = async (e) => {
+  // Handler for form submission
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus({ submitting: true, success: false, error: null });
-
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      setStatus({ submitting: false, success: true, error: null });
-      setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
-      setStatus({ submitting: false, success: false, error: "Failed to send message. Please try again." });
-    }
+    // Here you could send formData to an API endpoint
+    console.log("Form submitted:", formData);
+    setSubmitted(true);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50">
+    <>
       <Navbar />
-      
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-6xl mx-auto px-4 py-12"
+      <PageContainer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
       >
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Let's Connect! 🌟
-          </h1>
-          <p className="text-lg text-gray-600">
-            Have a question or want to collaborate?<br />
-            Drop me a message and I'll get back to you faster than a TikTok trend!
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-            {status.success ? (
-              <motion.div
-                initial={{ scale: 0.8 }}
-                animate={{ scale: 1 }}
-                className="text-center p-8"
-              >
-                <div className="text-6xl mb-4">🎉</div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  You're awesome, {formData.name || "friend"}!
-                </h2>
-                <p className="text-gray-600">
-                  I've got your message and will respond before your next coffee break.
-                </p>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="John Doe"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="john@example.com"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Your Message
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows="5"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="Hey Alex, I wanted to talk about..."
-                      required
-                    />
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={status.submitting}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-all flex items-center justify-center"
-                >
-                  {status.submitting ? (
-                    <>
-                      <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
-                        {/* Loading spinner SVG */}
-                      </svg>
-                      Sending...
-                    </>
-                  ) : (
-                    "Send Message 🚀"
-                  )}
-                </button>
-
-                {status.error && (
-                  <div className="text-red-600 text-sm mt-4">{status.error}</div>
-                )}
-              </form>
-            )}
-          </div>
-
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Other Ways to Connect</h2>
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0">
-                    <Mail className="h-6 w-6 text-blue-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-gray-900">Email Directly</h3>
-                    <p className="text-gray-600">alex@devcorner.com</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0">
-                    <Twitter className="h-6 w-6 text-blue-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-gray-900">Twitter DMs</h3>
-                    <p className="text-gray-600">@alex_devcorner</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0">
-                    <GitHub className="h-6 w-6 text-gray-800" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-gray-900">GitHub</h3>
-                    <p className="text-gray-600">github.com/alex-devcorner</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl p-8 text-white">
-              <h2 className="text-2xl font-bold mb-4">Quick Support</h2>
-              <p className="mb-6">Need immediate help? Schedule a call with me:</p>
-              <button className="w-full bg-white text-blue-600 font-medium py-3 px-6 rounded-lg hover:bg-opacity-90 transition-all">
-                Book a Zoom Meeting 📅
-              </button>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-
+        <ContentWrapper>
+          <Title> 🌟Contact Us 💌 </Title>
+          <Subtitle>
+            We’d love to hear from you! Please fill out the form below and we’ll get back to you soon.
+          </Subtitle>
+          <Divider />
+          {submitted ? (
+            <SuccessMessage>
+              Thank you for reaching out, {formData.name || "guest"}! We will be in touch shortly.
+            </SuccessMessage>
+          ) : (
+            <Form onSubmit={handleSubmit}>
+              <FormField>
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Enter your name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </FormField>
+              <FormField>
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="name@example.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </FormField>
+              <FormField>
+                <Label htmlFor="message">Message</Label>
+                <TextArea
+                  id="message"
+                  name="message"
+                  placeholder="Enter your message"
+                  rows={5}
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                />
+              </FormField>
+              <Button type="submit">Send Message</Button>
+            </Form>
+          )}
+        </ContentWrapper>
+      </PageContainer>
       <Footer />
-    </div>
+    </>
   );
 };
 
 export default ContactPage;
+
+/* Styled Components */
+
+const PageContainer = styled(motion.div)`
+  background: linear-gradient(135deg, #ffe6e6, #fff0e6);
+  min-height: 80vh;
+  padding: 4rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ContentWrapper = styled.div`
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  padding: 2rem 3rem;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  text-align: center;
+`;
+
+const Title = styled.h1`
+  font-size: 2.5rem;
+  color: #d35400;
+  margin-bottom: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
+`;
+
+const Subtitle = styled.p`
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2rem;
+`;
+
+const Divider = styled.hr`
+  border: none;
+  height: 1px;
+  background: #eee;
+  margin: 1rem 0 2rem;
+`;
+
+const SuccessMessage = styled.div`
+  padding: 1.5rem;
+  background: #dff0d8;
+  border-radius: 8px;
+  color: #3c763d;
+  font-size: 1.2rem;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+const FormField = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+`;
+
+const Label = styled.label`
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+`;
+
+const Input = styled.input`
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  &:focus {
+    border-color: #d35400;
+    outline: none;
+  }
+`;
+
+const TextArea = styled.textarea`
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  &:focus {
+    border-color: #d35400;
+    outline: none;
+  }
+`;
+
+const Button = styled.button`
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(45deg, #ff6b6b, #f39c12);
+  border: none;
+  color: #fff;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
