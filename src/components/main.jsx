@@ -27,12 +27,26 @@ const Home = () => {
   }, []);
 
   // Get greeting based on the current hour from state
-  const getGreeting = () => {
+  /*const getGreeting = () => {
     const hour = currentTime.getHours();
     if (hour < 12) return "Rise & Shine ✨";
     if (hour < 18) return "Afternoon Glow ☀️";
     return "Evening Elegance 🌙";
   };
+  */
+  const getGreeting = () => {
+    const hour = currentTime.getHours();
+    if (hour < 12) {
+      return "Rise & Shine ✨";
+    } else if (hour < 18) {
+      return "Afternoon Glow ☀️";
+    } else if (hour < 21) {
+      return "Evening Elegance 🌙";
+    } else {
+      return "Night Time Bliss 🌌";
+    }
+  };
+  
 
   // Format the time to a human-readable string
   const formattedTime = currentTime.toLocaleTimeString([], {
