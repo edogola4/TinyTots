@@ -1,4 +1,4 @@
-
+/* global particlesJS */
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
@@ -65,7 +65,9 @@ const Home = () => {
   // </script>
   // <!--End of Tawk.to Script-->
   useEffect(() => {
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    // Use the global window object for Tawk_API and Tawk_LoadStart
+    window.Tawk_API = window.Tawk_API || {};
+    window.Tawk_LoadStart = new Date();
     (function () {
       var s1 = document.createElement("script");
       var s0 = document.getElementsByTagName("script")[0];
@@ -75,6 +77,144 @@ const Home = () => {
       s1.setAttribute("crossorigin", "*");
       s0.parentNode.insertBefore(s1, s0);
     })();
+  }, []);
+  
+
+  // Initialize particlesJS
+  useEffect(() => {
+    /* --------------------------------------------------------
+       Customized Particle Animation for Professional Web Page
+       -------------------------------------------------------- */
+
+    /* 
+       This script sets up a customized particle animation on the
+       'particles-js' element. You can modify the appearance and
+       behavior of the particles by adjusting the values in the
+       configuration object below.
+    */
+
+    /* 
+       particlesJS function initializes the particle effect directly
+       without the need for an external JSON file.
+    */
+    if (window.particlesJS) {
+      particlesJS("particles-js", {
+        "particles": {
+          "number": {
+            "value": 60,
+            "density": {
+              "enable": true,
+              "value_area": 1000
+            }
+          },
+          "color": {
+            "value": "#2e86de"
+          },
+          "shape": {
+            "type": "triangle",
+            "stroke": {
+              "width": 0,
+              "color": "#ffffff"
+            },
+            "polygon": {
+              "nb_sides": 3
+            },
+            "image": {
+              "src": "img/github.svg",
+              "width": 100,
+              "height": 100
+            }
+          },
+          "opacity": {
+            "value": 0.6,
+            "random": false,
+            "anim": {
+              "enable": false,
+              "speed": 1,
+              "opacity_min": 0.3,
+              "sync": false
+            }
+          },
+          "size": {
+            "value": 7,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 10,
+              "size_min": 0.5,
+              "sync": false
+            }
+          },
+          "line_linked": {
+            "enable": true,
+            "distance": 180,
+            "color": "#2e86de",
+            "opacity": 0.6,
+            "width": 1
+          },
+          "move": {
+            "enable": true,
+            "speed": 4,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "out",
+            "attract": {
+              "enable": false,
+              "rotateX": 800,
+              "rotateY": 1600
+            }
+          }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "bubble"
+            },
+            "onclick": {
+              "enable": true,
+              "mode": "push"
+            },
+            "resize": true
+          },
+          "modes": {
+            "grab": {
+              "distance": 400,
+              "line_linked": {
+                "opacity": 0.8
+              }
+            },
+            "bubble": {
+              "distance": 200,
+              "size": 10,
+              "duration": 2,
+              "opacity": 1,
+              "speed": 3
+            },
+            "repulse": {
+              "distance": 100
+            },
+            "push": {
+              "particles_nb": 5
+            },
+            "remove": {
+              "particles_nb": 2
+            }
+          }
+        },
+        "retina_detect": true,
+        "config_demo": {
+          "hide_card": true,
+          "background_color": "#f8f9fa",
+          "background_image": "",
+          "background_position": "50% 50%",
+          "background_repeat": "no-repeat",
+          "background_size": "cover"
+        }
+      });
+    }
   }, []);
 
   // Get greeting based on the current hour
@@ -109,6 +249,9 @@ const Home = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
+          {/* The particles container for particle animation */}
+          <ParticlesContainer id="particles-js" />
+
           <HeroImage>
             {/*<ParallaxImage
               src={logoWhite}
@@ -161,12 +304,22 @@ const HeroContainer = styled(motion.div)`
   overflow: hidden;
 `;
 
+const ParticlesContainer = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+`;
+
 const HeroImage = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
 `;
 
 const ParallaxImage = styled(motion.img)`
@@ -188,6 +341,7 @@ const GradientOverlay = styled.div`
     rgba(18, 18, 18, 0.2) 100%
   );
   backdrop-filter: blur(2px);
+  z-index: 2;
 `;
 
 const ContentWrapper = styled.div`
@@ -197,6 +351,7 @@ const ContentWrapper = styled.div`
   align-items: center;
   padding: 0 8%;
   color: #fff;
+  z-index: 3;
 `;
 
 const TextGroup = styled(motion.div)`
@@ -267,7 +422,5 @@ const CtaButton = styled(motion.button)`
   backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 `;
-
-// Updated Styled Components
 
 export default Home;
