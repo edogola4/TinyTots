@@ -33,17 +33,17 @@ npm start
 
 
 ## Technologies
-Core: React 18, React Router 6
+**Core:** React 18, React Router 6
 
-Styling: styled-components, CSS animations
+**Styling:** styled-components, CSS animations
 
-Animations: Framer Motion, react-loading-skeleton
+**Animations:** Framer Motion, react-loading-skeleton
 
-State Management: Redux Toolkit
+**State Management:** Redux Toolkit
 
-UI Elements: react-hot-toast, react-icons
+**UI Elements:** react-hot-toast, react-icons
 
-Background Effects: particles.js
+**Background Effects:** particles.js
 
-Chat Integration: Tawk.to
+**Chat Integration:** Tawk.to
 
