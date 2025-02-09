@@ -1,17 +1,15 @@
 /*
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import Loading from "./Loading";
-import logoWhite from "../assets/logo_white.jpg";
-//import Typed from "react-typed";
+//import logoWhite from "../assets/logo_white.jpg";
+import Typed from "typed.js";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
-
-
-<ParallaxImage src={logoWhite} alt="Modern Fashion Collection" />
+  const typingTextRef = useRef(null);
 
   // Update loading state
   useEffect(() => {
@@ -26,14 +24,34 @@ const Home = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Get greeting based on the current hour from state
-  /*const getGreeting = () => {
-    const hour = currentTime.getHours();
-    if (hour < 12) return "Rise & Shine ✨";
-    if (hour < 18) return "Afternoon Glow ☀️";
-    return "Evening Elegance 🌙";
-  };
-  *
+  // Initialize typed.js effect once loading is false
+  useEffect(() => {
+    if (!loading && typingTextRef.current) {
+      const typed = new Typed(typingTextRef.current, {
+      
+        strings: [
+          "Organic Cotton Essentials 🌱",
+          "Eco-Friendly Materials ♻️",
+          "Hypoallergenic Fabrics",
+          "Ethical Manufacturing Practices",
+          "Seasonal Collections",
+          "Parent-Approved Designs 👪",
+          "Easy-Care Clothing",
+          "Size-Inclusive Options",
+          "Play-Ready Outfits 🧸",
+          "Developmental Appropriate Styles",
+          "Gender-Neutral Collections"
+        ],
+        loop: true,
+        typeSpeed: 50,
+        backSpeed: 30,
+        backDelay: 1000,
+      });
+      return () => typed.destroy();
+    }
+  }, [loading]);
+
+  // Get greeting based on the current hour
   const getGreeting = () => {
     const hour = currentTime.getHours();
     if (hour < 12) {
@@ -46,13 +64,12 @@ const Home = () => {
       return "Night Time Bliss 🌌";
     }
   };
-  
 
   // Format the time to a human-readable string
   const formattedTime = currentTime.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
   });
 
   return (
@@ -67,13 +84,13 @@ const Home = () => {
           transition={{ duration: 0.5 }}
         >
           <HeroImage>
-            <ParallaxImage
-              src="./assets/logo_white.jpg"
+            {/*<ParallaxImage
+              src={logoWhite}
               alt="Modern Fashion Collection"
               initial={{ scale: 1.1 }}
               animate={{ scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-            />
+            />*}
             <GradientOverlay />
           </HeroImage>
 
@@ -84,15 +101,18 @@ const Home = () => {
               transition={{ delay: 0.3 }}
             >
               <GreetingText>{getGreeting()}</GreetingText>
-              <TimeText>{formattedTime}</TimeText> 
+              <TimeText>{formattedTime}</TimeText>
               <MainHeading>
                 Curated Styles for <br />
                 <Emphasis>Modern Littles</Emphasis>
               </MainHeading>
-              <SubText>
+              {/* Render the typed.js text *}
+              <TypingText ref={typingTextRef} className="typing-text" />
+              {/*<SubText>
                 Discover sustainable, organic-cotton essentials designed for
                 play and growth. Shop our ethically crafted collection.
-              </SubText>
+              </SubText>*}
+              <subText></subText>
               <CtaButton
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -176,7 +196,7 @@ const MainHeading = styled.h1`
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 1.5rem;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -188,6 +208,21 @@ const Emphasis = styled.span`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
+
+const TypingText = styled.span`
+  font-size: 2.1rem;
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+  margin-top: 0.5rem;
+  animation: gradientAnimation 8s ease infinite;
+`;
+
+
+
+
 
 const SubText = styled.p`
   font-size: 1.1rem;
@@ -211,10 +246,11 @@ const CtaButton = styled(motion.button)`
   border: 1px solid rgba(255, 255, 255, 0.1);
 `;
 
+// Updated Styled Components
+
 export default Home;
-
-
 */
+
 
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
@@ -245,7 +281,6 @@ const Home = () => {
   useEffect(() => {
     if (!loading && typingTextRef.current) {
       const typed = new Typed(typingTextRef.current, {
-      
         strings: [
           "Organic Cotton Essentials 🌱",
           "Eco-Friendly Materials ♻️",
@@ -267,6 +302,33 @@ const Home = () => {
       return () => typed.destroy();
     }
   }, [loading]);
+
+  // Inject Tawk.to Script (do not delete the commented out code below)
+  // <!--Start of Tawk.to Script-->
+  // <script type="text/javascript">
+  //   var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+  //   (function () {
+  //     var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+  //     s1.async = true;
+  //     s1.src = 'https://embed.tawk.to/671b6bef2480f5b4f593ad9d/1ib1hr8va';
+  //     s1.charset = 'UTF-8';
+  //     s1.setAttribute('crossorigin', '*');
+  //     s0.parentNode.insertBefore(s1, s0);
+  //   })();
+  // </script>
+  // <!--End of Tawk.to Script-->
+  useEffect(() => {
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script");
+      var s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = "https://embed.tawk.to/671b6bef2480f5b4f593ad9d/1ib1hr8va";
+      s1.charset = "UTF-8";
+      s1.setAttribute("crossorigin", "*");
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+  }, []);
 
   // Get greeting based on the current hour
   const getGreeting = () => {
@@ -428,9 +490,13 @@ const Emphasis = styled.span`
 
 const TypingText = styled.span`
   font-size: 2.1rem;
-  color: rgba(255, 255, 255, 0.85);
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: block;
   margin-top: 0.5rem;
+  animation: gradientAnimation 8s ease infinite;
 `;
 
 const SubText = styled.p`
@@ -456,7 +522,5 @@ const CtaButton = styled(motion.button)`
 `;
 
 // Updated Styled Components
-
-
 
 export default Home;
