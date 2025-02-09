@@ -220,7 +220,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import Loading from "./Loading";
-import logoWhite from "../assets/logo_white.jpg";
+//import logoWhite from "../assets/logo_white.jpg";
 import Typed from "typed.js";
 
 const Home = () => {
@@ -301,13 +301,13 @@ const Home = () => {
           transition={{ duration: 0.5 }}
         >
           <HeroImage>
-            <ParallaxImage
+            {/*<ParallaxImage
               src={logoWhite}
               alt="Modern Fashion Collection"
               initial={{ scale: 1.1 }}
               animate={{ scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-            />
+            />*/}
             <GradientOverlay />
           </HeroImage>
 
@@ -329,6 +329,7 @@ const Home = () => {
                 Discover sustainable, organic-cotton essentials designed for
                 play and growth. Shop our ethically crafted collection.
               </SubText>*/}
+              <subText></subText>
               <CtaButton
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -426,7 +427,7 @@ const Emphasis = styled.span`
 `;
 
 const TypingText = styled.span`
-  font-size: 1.1rem;
+  font-size: 2.1rem;
   color: rgba(255, 255, 255, 0.85);
   display: block;
   margin-top: 0.5rem;
