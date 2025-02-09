@@ -22,4 +22,28 @@ A modern e-commerce platform specializing in eco-friendly children's clothing an
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/tinytots-boutique.git
+   git clone https://github.com/edogola4/tinytots-boutique.git
+
+2. Install dependencies:
+    cd tinytots-boutique
+    npm install
+3. Start the development server:
+npm start
+   
+
+
+## Technologies
+Core: React 18, React Router 6
+
+Styling: styled-components, CSS animations
+
+Animations: Framer Motion, react-loading-skeleton
+
+State Management: Redux Toolkit
+
+UI Elements: react-hot-toast, react-icons
+
+Background Effects: particles.js
+
+Chat Integration: Tawk.to
+
