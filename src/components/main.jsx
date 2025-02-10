@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Loading from "./Loading";
 //import logoWhite from "../assets/logo_white.jpg";
 import Typed from "typed.js";
+import { Analytics } from "@vercel/analytics/react"
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
