@@ -47,6 +47,9 @@ const Home = () => {
         typeSpeed: 50,
         backSpeed: 30,
         backDelay: 1000,
+        showCursor: true,
+  cursorChar: '|',
+  smartBackspace: true
       });
       return () => typed.destroy();
     }
