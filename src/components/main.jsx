@@ -1,3 +1,4 @@
+
 /* global particlesJS */
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
@@ -5,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Loading from "./Loading";
 //import logoWhite from "../assets/logo_white.jpg";
 import Typed from "typed.js";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -80,7 +81,6 @@ const Home = () => {
   }, []);
 
   // Initialize particlesJS
-  // I need to positin it well (in index.html)
   useEffect(() => {
     if (window.particlesJS) {
       particlesJS("particles-js", {
@@ -224,61 +224,65 @@ const Home = () => {
   });
 
   return (
-    <AnimatePresence>
-      {loading ? (
-        <Loading />
-      ) : (
-        <HeroContainer
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          {/* Place the particles container at the top of the hero section */}
-          <ParticlesContainer id="particles-js" />
+    <>
+      <AnimatePresence>
+        {loading ? (
+          <Loading />
+        ) : (
+          <HeroContainer
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {/* Place the particles container at the top of the hero section */}
+            <ParticlesContainer id="particles-js" />
 
-          <HeroImage>
-            {/* Optionally include an image with ParallaxImage */}
-            {/*<ParallaxImage
-              src={logoWhite}
-              alt="Modern Fashion Collection"
-              initial={{ scale: 1.1 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-            />*/}
-            <GradientOverlay />
-          </HeroImage>
+            <HeroImage>
+              {/* Optionally include an image with ParallaxImage */}
+              {/*<ParallaxImage
+                src={logoWhite}
+                alt="Modern Fashion Collection"
+                initial={{ scale: 1.1 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+              />*/}
+              <GradientOverlay />
+            </HeroImage>
 
-          <ContentWrapper>
-            <TextGroup
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              <GreetingText>{getGreeting()}</GreetingText>
-              <TimeText>{formattedTime}</TimeText>
-              <MainHeading>
-                Curated Styles for <br />
-                <Emphasis>Modern Littles</Emphasis>
-              </MainHeading>
-              {/* Render the typed.js text */}
-              <TypingText ref={typingTextRef} className="typing-text" />
-              {/*<SubText>
-                Discover sustainable, organic-cotton essentials designed for
-                play and growth. Shop our ethically crafted collection.
-              </SubText>*/}
-              <subText></subText>
-              <CtaButton
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+            <ContentWrapper>
+              <TextGroup
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
               >
-                Explore Collection
-              </CtaButton>
-            </TextGroup>
-          </ContentWrapper>
-        </HeroContainer>
-      )}
-    </AnimatePresence>
+                <GreetingText>{getGreeting()}</GreetingText>
+                <TimeText>{formattedTime}</TimeText>
+                <MainHeading>
+                  Curated Styles for <br />
+                  <Emphasis>Modern Littles</Emphasis>
+                </MainHeading>
+                {/* Render the typed.js text */}
+                <TypingText ref={typingTextRef} className="typing-text" />
+                {/*<SubText>
+                  Discover sustainable, organic-cotton essentials designed for
+                  play and growth. Shop our ethically crafted collection.
+                </SubText>*/}
+                <subText></subText>
+                <CtaButton
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Explore Collection
+                </CtaButton>
+              </TextGroup>
+            </ContentWrapper>
+          </HeroContainer>
+        )}
+      </AnimatePresence>
+      {/* Use the imported Analytics component */}
+      <Analytics />
+    </>
   );
 };
 
@@ -298,7 +302,7 @@ const ParticlesContainer = styled.div`
   height: 100%;
   top: 0;
   left: 0;
-  /* This container should be behind your content but inside the hero section */
+  /* This container is behind your content but inside the hero section */
   z-index: 0;
 `;
 
@@ -311,6 +315,7 @@ const HeroImage = styled.div`
   z-index: 1;
 `;
 
+// eslint-disable-next-line no-unused-vars
 const ParallaxImage = styled(motion.img)`
   width: 100%;
   height: 100%;
@@ -390,6 +395,7 @@ const TypingText = styled.span`
   animation: gradientAnimation 8s ease infinite;
 `;
 
+// eslint-disable-next-line no-unused-vars
 const SubText = styled.p`
   font-size: 1.1rem;
   line-height: 1.6;
