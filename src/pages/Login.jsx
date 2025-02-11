@@ -12,7 +12,7 @@ const Login = () => {
     e.preventDefault();
     // For demonstration, log the credentials
     console.log("Logging in with:", email, password);
-    // Implement your login logic here (API call, validations, etc.)
+    // I willImplement my login logic here (API call, validations, etc.)
   };
 
   return (
