@@ -1,10 +1,9 @@
-
 /* global particlesJS */
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import Loading from "./Loading";
-//import logoWhite from "../assets/logo_white.jpg";
+//import logoWhite from "../assets/logo_white.jpg"; // Not the right image (kinda ugly)
 import Typed from "typed.js";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -71,6 +70,7 @@ const Home = () => {
   }, []);
 
   // Initialize particlesJS
+  // I have disable it in the html file due to positioning issues
   useEffect(() => {
     if (window.particlesJS) {
       particlesJS("particles-js", {
