@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { Footer, Navbar } from "../components";
 import styled from "styled-components";
