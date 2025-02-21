@@ -9,7 +9,7 @@ import { FaShoppingCart, FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-const Product = () => {
+const Products = () => {
   const [data, setData] = useState([]);
   const [activeCat, setActiveCat] = useState("All");
   const [loading, setLoading] = useState(false);
@@ -165,7 +165,7 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default Products;
 
 /* Styled Components */
 
