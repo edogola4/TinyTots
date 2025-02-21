@@ -78,5 +78,845 @@
     "description": "Customizable children's books featuring your child's name and avatar. Hardcover with anti-tear pages.",
     "category": "Toys",
     "image": "https://images.pexels.com/photos/6947408/pexels-photo-6947408.jpeg"
+  },
+  {
+    "id": 11,
+    "title": "Smart Baby Monitor",
+    "price": 19999,
+    "description": "HD video monitor with cry detection, temperature sensors, and lullaby player. Night vision and two-way audio.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/7974/pexels-photo.jpg"
+  },
+  {
+    "id": 12,
+    "title": "Convertible Baby Carrier",
+    "price": 12999,
+    "description": "Ergonomic 6-position baby wrap carrier with lumbar support. Suitable from newborn to toddler stage.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/3514985/pexels-photo-3514985.jpeg"
+  },
+  {
+    "id": 13,
+    "title": "Teething Mitten Set",
+    "price": 899,
+    "description": "Silicone-textured mittens with attached chewable surfaces. Machine washable and freezer-safe.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/6153355/pexels-photo-6153355.jpeg"
+  },
+  {
+    "id": 14,
+    "title": "Organic Baby Shampoo",
+    "price": 1499,
+    "description": "pH-balanced tear-free formula with calendula and chamomile. 98% natural ingredients, vegan-friendly.",
+    "category": "Mom & Baby",
+    "image": "https://images.pexels.com/photos/4207909/pexels-photo-4207909.jpeg"
+  },
+  {
+    "id": 15,
+    "title": "Stroller Organizer",
+    "price": 2499,
+    "description": "Universal stroller caddy with insulated bottle holders and wipeable compartments. Fits all stroller types.",
+    "category": "Mom & Baby",
+    "image": "https://images.pexels.com/photos/4666754/pexels-photo-4666754.jpeg"
+  },
+  {
+    "id": 16,
+    "title": "Baby Food Maker",
+    "price": 8999,
+    "description": "3-in-1 steamer, blender, and food warmer. BPA-free materials with automatic shut-off feature.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/5554655/pexels-photo-5554655.jpeg"
+  },
+  {
+    "id": 17,
+    "title": "Musical Mobile",
+    "price": 5999,
+    "description": "Rotating crib mobile with 20 classical melodies and projector. Remote controlled with timer function.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/7974/pexels-photo.jpg"
+  },
+  {
+    "id": 18,
+    "title": "Baby Knee Pads",
+    "price": 1299,
+    "description": "Breathable crawling protectors with non-slip silicone grips. Adjustable straps for growing babies.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/5874707/pexels-photo-5874707.jpeg"
+  },
+  {
+    "id": 19,
+    "title": "Digital Ear Thermometer",
+    "price": 3499,
+    "description": "1-second forehead thermometer with color-coded fever indicator. Memory function for 10 readings.",
+    "category": "Mom & Baby",
+    "image": "https://images.pexels.com/photos/4225920/pexels-photo-4225920.jpeg"
+  },
+  {
+    "id": 20,
+    "title": "Silicone Pacifier Set",
+    "price": 999,
+    "description": "Orthodontic nipple design with ventilation holes. Includes sterilizing case and clip.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4207899/pexels-photo-4207899.jpeg"
+  },
+  {
+    "id": 21,
+    "title": "Baby Bath Thermometer",
+    "price": 799,
+    "description": "Duck-shaped floating thermometer with LED display. Alerts for unsafe water temperatures.",
+    "category": "Mom & Baby",
+    "image": "https://images.pexels.com/photos/4207908/pexels-photo-4207908.jpeg"
+  },
+  {
+    "id": 22,
+    "title": "Convertible Crib",
+    "price": 29999,
+    "description": "Solid wood crib converts to toddler bed and daybed. 3-position mattress height adjustment.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/7974/pexels-photo.jpg"
+  },
+  {
+    "id": 23,
+    "title": "Baby Nail Care Kit",
+    "price": 1499,
+    "description": "Electric nail trimmer with LED light, files, and nose aspirator. Safe for delicate skin.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4205924/pexels-photo-4205924.jpeg"
+  },
+  {
+    "id": 24,
+    "title": "Portable High Chair",
+    "price": 8999,
+    "description": "Foldable travel high chair with 5-point harness. Fits standard dining chairs up to 3.5\" thick.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4666754/pexels-photo-4666754.jpeg"
+  },
+  {
+    "id": 25,
+    "title": "Baby Proofing Kit",
+    "price": 4999,
+    "description": "Complete safety set includes outlet covers, corner guards, cabinet locks, and door stoppers.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/5825569/pexels-photo-5825569.jpeg"
+  },
+  {
+    "id": 11,
+    "title": "Bamboo Baby Rompers",
+    "price": 1599,
+    "description": "Eco-friendly bamboo fabric rompers designed to keep your baby cool and comfortable.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4599766/pexels-photo-4599766.jpeg"
+  },
+  {
+    "id": 12,
+    "title": "Handmade Knit Booties",
+    "price": 1299,
+    "description": "Soft and warm knit booties hand-crafted for tiny feet. Perfect for winter strolls.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4599767/pexels-photo-4599767.jpeg"
+  },
+  {
+    "id": 13,
+    "title": "Eco-Friendly Diaper Bags",
+    "price": 1999,
+    "description": "Stylish and durable diaper bags made with recycled materials. Multiple compartments for storage.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599768/pexels-photo-4599768.jpeg"
+  },
+  {
+    "id": 14,
+    "title": "Infant Sun Hats",
+    "price": 1299,
+    "description": "Lightweight sun hats with UV protection, perfect for outdoor adventures with your baby.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599769/pexels-photo-4599769.jpeg"
+  },
+  {
+    "id": 15,
+    "title": "Soft Baby Mittens",
+    "price": 899,
+    "description": "Cozy mittens designed to keep little hands warm without hindering movement.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599770/pexels-photo-4599770.jpeg"
+  },
+  {
+    "id": 16,
+    "title": "Organic Toddler T-Shirts",
+    "price": 1799,
+    "description": "Comfortable and breathable organic cotton T-shirts for toddlers, available in multiple colors.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4599771/pexels-photo-4599771.jpeg"
+  },
+  {
+    "id": 17,
+    "title": "Children's Pajama Sets",
+    "price": 2499,
+    "description": "Adorable pajama sets made from soft cotton for a comfortable night's sleep.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4599772/pexels-photo-4599772.jpeg"
+  },
+  {
+    "id": 18,
+    "title": "Toddler Denim Overalls",
+    "price": 2999,
+    "description": "Durable denim overalls designed for active toddlers. Easy to clean and stylish.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4599773/pexels-photo-4599773.jpeg"
+  },
+  {
+    "id": 19,
+    "title": "Baby Beanie Caps",
+    "price": 1099,
+    "description": "Soft beanie caps to keep your baby's head warm without causing discomfort.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599774/pexels-photo-4599774.jpeg"
+  },
+  {
+    "id": 20,
+    "title": "Baby Leggings",
+    "price": 1599,
+    "description": "Stretchable and comfortable leggings perfect for everyday wear.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4599775/pexels-photo-4599775.jpeg"
+  },
+  {
+    "id": 21,
+    "title": "Wooden Teething Rings",
+    "price": 1299,
+    "description": "Handcrafted wooden teething rings that soothe sore gums naturally.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599776/pexels-photo-4599776.jpeg"
+  },
+  {
+    "id": 22,
+    "title": "Soft Plush Animals",
+    "price": 2299,
+    "description": "Cuddly plush animals designed for both play and comfort.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599777/pexels-photo-4599777.jpeg"
+  },
+  {
+    "id": 23,
+    "title": "Interactive Musical Toys",
+    "price": 3999,
+    "description": "Engaging musical toys that introduce your child to sounds and rhythms.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599778/pexels-photo-4599778.jpeg"
+  },
+  {
+    "id": 24,
+    "title": "Eco-Friendly Stroller Toys",
+    "price": 1899,
+    "description": "Sensory toys designed to attach to strollers, keeping little ones entertained on the go.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599779/pexels-photo-4599779.jpeg"
+  },
+  {
+    "id": 25,
+    "title": "Wooden Puzzles for Toddlers",
+    "price": 2499,
+    "description": "Colorful wooden puzzles that challenge and develop problem-solving skills.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599780/pexels-photo-4599780.jpeg"
+  },
+  {
+    "id": 26,
+    "title": "Baby Sensory Balls",
+    "price": 1399,
+    "description": "Textured sensory balls to stimulate your baby’s tactile development.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599781/pexels-photo-4599781.jpeg"
+  },
+  {
+    "id": 27,
+    "title": "Plush Rattle Toys",
+    "price": 1199,
+    "description": "Adorable plush rattles that combine comfort with the fun of a rattle sound.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599782/pexels-photo-4599782.jpeg"
+  },
+  {
+    "id": 28,
+    "title": "Animal-Shaped Teethers",
+    "price": 999,
+    "description": "Cute, animal-themed teethers made of safe silicone to ease teething discomfort.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599783/pexels-photo-4599783.jpeg"
+  },
+  {
+    "id": 29,
+    "title": "Soft Fabric Activity Books",
+    "price": 1599,
+    "description": "Interactive fabric books designed to engage your baby’s senses and encourage early learning.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599784/pexels-photo-4599784.jpeg"
+  },
+  {
+    "id": 30,
+    "title": "Personalized Growth Charts",
+    "price": 3499,
+    "description": "Custom growth charts to track your child’s development in style.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599785/pexels-photo-4599785.jpeg"
+  },
+  {
+    "id": 31,
+    "title": "Customizable Wall Decals",
+    "price": 1899,
+    "description": "Peel-and-stick wall decals to add a personal touch to your baby’s nursery.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599786/pexels-photo-4599786.jpeg"
+  },
+  {
+    "id": 32,
+    "title": "Organic Cotton Crib Sheets",
+    "price": 2299,
+    "description": "Soft, breathable crib sheets made from 100% organic cotton.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599787/pexels-photo-4599787.jpeg"
+  },
+  {
+    "id": 33,
+    "title": "Eco-Friendly Changing Pads",
+    "price": 2799,
+    "description": "Comfortable changing pads crafted from sustainable materials.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599788/pexels-photo-4599788.jpeg"
+  },
+  {
+    "id": 34,
+    "title": "Baby Room Night Lights",
+    "price": 1499,
+    "description": "Soft night lights that create a soothing ambiance in your child’s room.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599789/pexels-photo-4599789.jpeg"
+  },
+  {
+    "id": 35,
+    "title": "Musical Lullaby Projectors",
+    "price": 3999,
+    "description": "Projectors that display calming images and play lullabies for bedtime.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599790/pexels-photo-4599790.jpeg"
+  },
+  {
+    "id": 36,
+    "title": "Portable Crib Mobiles",
+    "price": 2999,
+    "description": "Lightweight and adjustable mobiles to keep your baby entertained.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599791/pexels-photo-4599791.jpeg"
+  },
+  {
+    "id": 37,
+    "title": "Custom Nursery Art Prints",
+    "price": 1799,
+    "description": "Beautiful, customizable art prints to decorate your baby’s room.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599792/pexels-photo-4599792.jpeg"
+  },
+  {
+    "id": 38,
+    "title": "Organic Bedding Sets",
+    "price": 3599,
+    "description": "Complete bedding sets crafted from organic materials for ultimate comfort.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599793/pexels-photo-4599793.jpeg"
+  },
+  {
+    "id": 39,
+    "title": "Adjustable Crib Canopy",
+    "price": 3199,
+    "description": "Elegant crib canopies that add style and privacy to your nursery.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599794/pexels-photo-4599794.jpeg"
+  },
+  {
+    "id": 40,
+    "title": "Silicone Bibs",
+    "price": 899,
+    "description": "Easy-to-clean, BPA-free silicone bibs that catch spills and stains.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4599795/pexels-photo-4599795.jpeg"
+  },
+  {
+    "id": 41,
+    "title": "Ergonomic Baby Bottles",
+    "price": 1299,
+    "description": "Designed for a natural feeding experience with an easy-grip design.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4599796/pexels-photo-4599796.jpeg"
+  },
+  {
+    "id": 42,
+    "title": "BPA-Free Sippy Cups",
+    "price": 999,
+    "description": "Durable sippy cups that are safe for everyday use.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4599797/pexels-photo-4599797.jpeg"
+  },
+  {
+    "id": 43,
+    "title": "Insulated Snack Containers",
+    "price": 1499,
+    "description": "Keep snacks fresh on the go with these insulated containers.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4599798/pexels-photo-4599798.jpeg"
+  },
+  {
+    "id": 44,
+    "title": "Portable High Chair Booster",
+    "price": 3999,
+    "description": "Adjustable booster seat that fits most high chairs for on-the-go feeding.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4599799/pexels-photo-4599799.jpeg"
+  },
+  {
+    "id": 45,
+    "title": "Reusable Food Pouches",
+    "price": 799,
+    "description": "Eco-friendly food pouches for homemade baby food. Easy to clean and reuse.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4599800/pexels-photo-4599800.jpeg"
+  },
+  {
+    "id": 46,
+    "title": "Child-Sized Utensil Sets",
+    "price": 699,
+    "description": "Ergonomically designed utensils perfect for little hands.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4599801/pexels-photo-4599801.jpeg"
+  },
+  {
+    "id": 47,
+    "title": "Baby Food Prep Kits",
+    "price": 2499,
+    "description": "Everything you need to safely prepare nutritious meals for your baby.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4599802/pexels-photo-4599802.jpeg"
+  },
+  {
+    "id": 48,
+    "title": "Leak-Proof Bottle Holders",
+    "price": 1199,
+    "description": "Stylish bottle holders designed to prevent leaks during transport.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4599803/pexels-photo-4599803.jpeg"
+  },
+  {
+    "id": 49,
+    "title": "Toddler Lunch Boxes",
+    "price": 1599,
+    "description": "Durable, easy-to-open lunch boxes designed specifically for toddlers.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4599804/pexels-photo-4599804.jpeg"
+  },
+  {
+    "id": 50,
+    "title": "Eco-Friendly Sippy Straws",
+    "price": 499,
+    "description": "Reusable, soft sippy straws made from eco-friendly materials.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4599805/pexels-photo-4599805.jpeg"
+  },
+  {
+    "id": 51,
+    "title": "Soft Plush Doll Strollers",
+    "price": 3499,
+    "description": "Miniature strollers perfect for doll play, crafted with soft plush fabric.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599806/pexels-photo-4599806.jpeg"
+  },
+  {
+    "id": 52,
+    "title": "Customizable Baby Mobiles",
+    "price": 2299,
+    "description": "Beautiful mobiles that can be personalized with your baby’s name or theme.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599807/pexels-photo-4599807.jpeg"
+  },
+  {
+    "id": 53,
+    "title": "Wooden Rocking Horses",
+    "price": 4499,
+    "description": "Handcrafted rocking horses that inspire imaginative play.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599808/pexels-photo-4599808.jpeg"
+  },
+  {
+    "id": 54,
+    "title": "Handcrafted Baby Cradles",
+    "price": 6999,
+    "description": "Elegant cradles built with safety and style in mind.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599809/pexels-photo-4599809.jpeg"
+  },
+  {
+    "id": 55,
+    "title": "Organic Cotton Burp Cloths",
+    "price": 799,
+    "description": "Soft, absorbent burp cloths made from 100% organic cotton.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4599810/pexels-photo-4599810.jpeg"
+  },
+  {
+    "id": 56,
+    "title": "Unisex Baby Rompers",
+    "price": 1399,
+    "description": "Versatile rompers suitable for any baby, crafted with comfort in mind.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4599811/pexels-photo-4599811.jpeg"
+  },
+  {
+    "id": 57,
+    "title": "Patterned Baby Socks",
+    "price": 499,
+    "description": "Cute and cozy socks featuring fun patterns for little feet.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599812/pexels-photo-4599812.jpeg"
+  },
+  {
+    "id": 58,
+    "title": "Breathable Baby Caps",
+    "price": 599,
+    "description": "Lightweight caps that provide sun protection while keeping your baby cool.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599813/pexels-photo-4599813.jpeg"
+  },
+  {
+    "id": 59,
+    "title": "Reversible Baby Wraps",
+    "price": 1999,
+    "description": "Multi-functional wraps that offer comfort and style, reversible for two looks.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599814/pexels-photo-4599814.jpeg"
+  },
+  {
+    "id": 60,
+    "title": "Colorful Baby Leg Warmers",
+    "price": 899,
+    "description": "Fun and practical leg warmers that add a pop of color to any outfit.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4599815/pexels-photo-4599815.jpeg"
+  },
+  {
+    "id": 61,
+    "title": "Personalized Pacifier Clips",
+    "price": 699,
+    "description": "Keep pacifiers close with these customizable, stylish clips.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599816/pexels-photo-4599816.jpeg"
+  },
+  {
+    "id": 62,
+    "title": "Eco-Friendly Baby Shampoo Sets",
+    "price": 1299,
+    "description": "Gentle shampoo sets made with natural ingredients, safe for sensitive skin.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599817/pexels-photo-4599817.jpeg"
+  },
+  {
+    "id": 63,
+    "title": "Organic Teething Biscuits",
+    "price": 999,
+    "description": "Healthy, organic biscuits designed to soothe teething discomfort.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599818/pexels-photo-4599818.jpeg"
+  },
+  {
+    "id": 64,
+    "title": "Infant Massage Oils",
+    "price": 1099,
+    "description": "Nourishing massage oils that help relax and soothe your baby.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599819/pexels-photo-4599819.jpeg"
+  },
+  {
+    "id": 65,
+    "title": "Customizable Baby Name Prints",
+    "price": 1499,
+    "description": "Beautiful prints personalized with your baby’s name to adorn the nursery.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599820/pexels-photo-4599820.jpeg"
+  },
+  {
+    "id": 66,
+    "title": "Wooden Learning Towers",
+    "price": 5499,
+    "description": "Sturdy towers that allow toddlers to safely reach counters and explore.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599821/pexels-photo-4599821.jpeg"
+  },
+  {
+    "id": 67,
+    "title": "Soft Sensory Blankets",
+    "price": 2999,
+    "description": "Multi-textured blankets that stimulate your baby’s sense of touch.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599822/pexels-photo-4599822.jpeg"
+  },
+  {
+    "id": 68,
+    "title": "Eco-Friendly Play Mats",
+    "price": 3999,
+    "description": "Durable, cushioned mats made from sustainable materials for safe playtime.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599823/pexels-photo-4599823.jpeg"
+  },
+  {
+    "id": 69,
+    "title": "Toddler Art Supplies Kits",
+    "price": 2599,
+    "description": "Complete kits featuring washable markers, crayons, and paper for budding artists.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599824/pexels-photo-4599824.jpeg"
+  },
+  {
+    "id": 70,
+    "title": "Baby Finger Foods Plates",
+    "price": 799,
+    "description": "Plates designed with divided sections to encourage self-feeding.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4599825/pexels-photo-4599825.jpeg"
+  },
+  {
+    "id": 71,
+    "title": "BPA-Free Baby Cutlery Sets",
+    "price": 999,
+    "description": "Child-safe cutlery sets with ergonomically designed handles.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4599826/pexels-photo-4599826.jpeg"
+  },
+  {
+    "id": 72,
+    "title": "Reusable Silicone Food Lids",
+    "price": 699,
+    "description": "Flexible lids that fit various containers to keep food fresh.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4599827/pexels-photo-4599827.jpeg"
+  },
+  {
+    "id": 73,
+    "title": "Organic Cotton Nursery Curtains",
+    "price": 3299,
+    "description": "Elegant curtains made from organic cotton to complement any nursery.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599828/pexels-photo-4599828.jpeg"
+  },
+  {
+    "id": 74,
+    "title": "Personalized Crib Mobiles",
+    "price": 2799,
+    "description": "Charming mobiles that can be customized to match your nursery decor.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599829/pexels-photo-4599829.jpeg"
+  },
+  {
+    "id": 75,
+    "title": "Custom Baby Growth Record Books",
+    "price": 1899,
+    "description": "Keepsake books to document your child’s growth milestones.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599830/pexels-photo-4599830.jpeg"
+  },
+  {
+    "id": 76,
+    "title": "Soft Plush Nursery Rugs",
+    "price": 3499,
+    "description": "Rugs that add warmth and style to your nursery, soft to the touch.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599831/pexels-photo-4599831.jpeg"
+  },
+  {
+    "id": 77,
+    "title": "Handcrafted Wooden Blocks",
+    "price": 2999,
+    "description": "Classic wooden blocks that inspire creativity and motor skills.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599832/pexels-photo-4599832.jpeg"
+  },
+  {
+    "id": 78,
+    "title": "Customizable Baby Pillowcases",
+    "price": 1599,
+    "description": "Personalized pillowcases crafted from soft, durable fabric.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599833/pexels-photo-4599833.jpeg"
+  },
+  {
+    "id": 79,
+    "title": "Toddler Art Easels",
+    "price": 3999,
+    "description": "Adjustable easels designed for little hands to explore creativity.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599834/pexels-photo-4599834.jpeg"
+  },
+  {
+    "id": 80,
+    "title": "Organic Toddler Swimwear",
+    "price": 2499,
+    "description": "Comfortable and stylish swimwear made from organic materials.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4599835/pexels-photo-4599835.jpeg"
+  },
+  {
+    "id": 81,
+    "title": "Reusable Snack Bags",
+    "price": 799,
+    "description": "Eco-friendly, washable snack bags perfect for on-the-go families.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599836/pexels-photo-4599836.jpeg"
+  },
+  {
+    "id": 82,
+    "title": "Eco-Friendly Baby Brush & Comb Sets",
+    "price": 899,
+    "description": "Gentle grooming sets crafted from sustainable materials.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599837/pexels-photo-4599837.jpeg"
+  },
+  {
+    "id": 83,
+    "title": "Baby Stroller Organizer Bags",
+    "price": 1999,
+    "description": "Convenient bags that attach to strollers for quick access to essentials.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599838/pexels-photo-4599838.jpeg"
+  },
+  {
+    "id": 84,
+    "title": "Personalized Family Photo Frames",
+    "price": 2299,
+    "description": "Custom frames designed to showcase precious family memories.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599839/pexels-photo-4599839.jpeg"
+  },
+  {
+    "id": 85,
+    "title": "Customizable Baby Door Signs",
+    "price": 999,
+    "description": "Adorable signs to personalize your baby’s room or nursery door.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599840/pexels-photo-4599840.jpeg"
+  },
+  {
+    "id": 86,
+    "title": "Soft, Cozy Toddler Blankets",
+    "price": 2799,
+    "description": "Lightweight blankets that provide warmth without overheating.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599841/pexels-photo-4599841.jpeg"
+  },
+  {
+    "id": 87,
+    "title": "Toddler Raincoats",
+    "price": 2999,
+    "description": "Waterproof raincoats designed to keep toddlers dry and comfortable.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4599842/pexels-photo-4599842.jpeg"
+  },
+  {
+    "id": 88,
+    "title": "Waterproof Baby Shoes",
+    "price": 3499,
+    "description": "Durable shoes designed to withstand wet weather while keeping tiny feet dry.",
+    "category": "Footwear",
+    "image": "https://images.pexels.com/photos/4599843/pexels-photo-4599843.jpeg"
+  },
+  {
+    "id": 89,
+    "title": "Toddler Sandals",
+    "price": 2299,
+    "description": "Comfortable and breathable sandals designed for active toddlers.",
+    "category": "Footwear",
+    "image": "https://images.pexels.com/photos/4599844/pexels-photo-4599844.jpeg"
+  },
+  {
+    "id": 90,
+    "title": "Miniature Baby Backpacks",
+    "price": 1599,
+    "description": "Cute backpacks designed for toddlers to carry their favorite toys.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599845/pexels-photo-4599845.jpeg"
+  },
+  {
+    "id": 91,
+    "title": "Baby Safety Corner Protectors",
+    "price": 799,
+    "description": "Soft corner protectors to keep your home safe for curious toddlers.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599846/pexels-photo-4599846.jpeg"
+  },
+  {
+    "id": 92,
+    "title": "Organic Baby Sleep Sacks",
+    "price": 1999,
+    "description": "Comfortable sleep sacks made from organic cotton to promote safe sleep.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4599847/pexels-photo-4599847.jpeg"
+  },
+  {
+    "id": 93,
+    "title": "Adjustable Baby Car Seat Covers",
+    "price": 2499,
+    "description": "Stylish and protective covers designed to fit most car seats.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599848/pexels-photo-4599848.jpeg"
+  },
+  {
+    "id": 94,
+    "title": "Reversible Toddler Jackets",
+    "price": 3499,
+    "description": "Versatile jackets that offer two stylish looks in one.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4599849/pexels-photo-4599849.jpeg"
+  },
+  {
+    "id": 95,
+    "title": "Baby Activity Centers",
+    "price": 4999,
+    "description": "Multi-functional activity centers that promote safe exploration and play.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599850/pexels-photo-4599850.jpeg"
+  },
+  {
+    "id": 96,
+    "title": "Customizable Baby Milestone Cards",
+    "price": 999,
+    "description": "Beautiful cards to record every important milestone in your baby’s first year.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/4599851/pexels-photo-4599851.jpeg"
+  },
+  {
+    "id": 97,
+    "title": "Hand-Painted Wooden Toys",
+    "price": 3999,
+    "description": "Unique, handcrafted wooden toys that double as decor.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4599852/pexels-photo-4599852.jpeg"
+  },
+  {
+    "id": 98,
+    "title": "Personalized Baby Growth Charts",
+    "price": 2999,
+    "description": "Elegant growth charts that can be personalized with your child’s name.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/4599853/pexels-photo-4599853.jpeg"
+  },
+  {
+    "id": 99,
+    "title": "Organic Toddler Denim Shorts",
+    "price": 2799,
+    "description": "Durable denim shorts made from organic cotton, perfect for active toddlers.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4599854/pexels-photo-4599854.jpeg"
+  },
+  {
+    "id": 100,
+    "title": "Eco-Friendly Baby Bib & Burp Cloth Sets",
+    "price": 1899,
+    "description": "A practical set including a reusable bib and matching burp cloth, made from sustainable materials.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4599855/pexels-photo-4599855.jpeg"
   }
 ]
