@@ -36,7 +36,10 @@ const Products = () => {
     const getProducts = async () => {
       setLoading(true);
       try {
-        const response = await fetch("https://fakestoreapi.com/products/");
+        // eslint-disable-next-line no-lone-blocks
+        {/*const response = await fetch("https://fakestoreapi.com/products/");*/}
+        const response = await fetch("/Items.json");
+
         if (!response.ok) {
           throw new Error("Failed to fetch products");
         }
@@ -85,7 +88,7 @@ const Products = () => {
   const ShowProducts = () => (
     <>
       <FilterContainer>
-        {["All", "men's clothing", "women's clothing", "jewelery", "electronics"].map((cat) => (
+        {["All", "Clothing", "Toys", "Nursery", "Feeding", "Accessories", "Mom & Baby", "Footwear"].map((cat) => (
           <FilterButton
             key={cat}
             className={activeCat === cat ? "active" : ""}
