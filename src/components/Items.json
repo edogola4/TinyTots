@@ -1,67 +1,82 @@
 [
-    {
-      "id": 1,
-      "title": "Adaptive Clothing",
-      "price": 20.00,
-      "description": "Growth-friendly designs with temperature-regulating fabric crafted for little explorers.",
-      "category": "Kids",
-      "image": "https://example.com/images/adaptive_clothing.jpg"
-    },
-    {
-      "id": 2,
-      "title": "Tiny Trendy T-Shirts",
-      "price": 12.50,
-      "description": "Soft organic cotton t-shirts designed for maximum comfort and playful style.",
-      "category": "Kids",
-      "image": "https://example.com/images/trendy_tshirts.jpg"
-    },
-    {
-      "id": 3,
-      "title": "Mom & Me Collections",
-      "price": 30.00,
-      "description": "Coordinated styles for special moments that celebrate the unique bond between mother and child.",
-      "category": "Women",
-      "image": "https://example.com/images/mom_me_collections.jpg"
-    },
-    {
-      "id": 4,
-      "title": "Stylish Maternity Wear",
-      "price": 45.00,
-      "description": "Elegant yet comfortable clothing designed for moms-to-be, available in various colors.",
-      "category": "Women",
-      "image": "https://example.com/images/maternity_wear.jpg"
-    },
-    {
-      "id": 5,
-      "title": "Child-Safe Accessories",
-      "price": 15.00,
-      "description": "Hypoallergenic accessories with safety clasps, designed with your child's safety and style in mind.",
-      "category": "Jewelry",
-      "image": "https://example.com/images/child_safe_accessories.jpg"
-    },
-    {
-      "id": 6,
-      "title": "Mini Charm Bracelet",
-      "price": 18.00,
-      "description": "Delicate, child-friendly jewelry designed to add a sparkle to any outfit.",
-      "category": "Jewelry",
-      "image": "https://example.com/images/mini_charm_bracelet.jpg"
-    },
-    {
-      "id": 7,
-      "title": "Smart Nursery",
-      "price": 75.00,
-      "description": "IoT-enabled devices for a modern nursery that ensure a safe and smart environment for your little one.",
-      "category": "Tech",
-      "image": "https://example.com/images/smart_nursery.jpg"
-    },
-    {
-      "id": 8,
-      "title": "Digital Learning Tablet",
-      "price": 60.00,
-      "description": "Kid-friendly tablet loaded with educational apps and interactive games.",
-      "category": "Tech",
-      "image": "https://example.com/images/learning_tablet.jpg"
-    }
-  ]
-  
+  {
+    "id": 1,
+    "title": "Organic Cotton Onesies",
+    "price": 1499,
+    "description": "Ultra-soft bamboo fiber onesies with snap closures for easy diaper changes. Hypoallergenic and perfect for sensitive skin.",
+    "category": "Clothing",
+    "image": "https://images.pexels.com/photos/4599765/pexels-photo-4599765.jpeg"
+  },
+  {
+    "id": 2,
+    "title": "Educational Plush Toys",
+    "price": 3499,
+    "description": "Interactive sensory toys with crinkle fabric, teething rings, and developmental features. Machine washable and BPA-free.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/6153385/pexels-photo-6153385.jpeg"
+  },
+  {
+    "id": 3,
+    "title": "Personalized Baby Blankets",
+    "price": 2599,
+    "description": "Premium muslin swaddles with custom embroidery. Temperature-regulating fabric for year-round comfort.",
+    "category": "Nursery",
+    "image": "https://images.pexels.com/photos/6621338/pexels-photo-6621338.jpeg"
+  },
+  {
+    "id": 4,
+    "title": "Silicone Feeding Sets",
+    "price": 1899,
+    "description": "Complete BPA-free feeding kit with suction bowls, soft-tip spoons, and chewable utensils. Dishwasher safe.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4207892/pexels-photo-4207892.jpeg"
+  },
+  {
+    "id": 5,
+    "title": "Reversible Bucket Hats",
+    "price": 1299,
+    "description": "UPF 50+ sun protection hats with adjustable chin strap. Water-resistant and foldable for travel.",
+    "category": "Accessories",
+    "image": "https://images.pexels.com/photos/6463313/pexels-photo-6463313.jpeg"
+  },
+  {
+    "id": 6,
+    "title": "Wooden Activity Cube",
+    "price": 4999,
+    "description": "Montessori-inspired learning toy with bead maze, shape sorter, and sensory activities. Non-toxic paints.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/4090309/pexels-photo-4090309.jpeg"
+  },
+  {
+    "id": 7,
+    "title": "Nursing Cover Poncho",
+    "price": 2999,
+    "description": "Multi-purpose cover with discreet nursing access and stroller coverage. 100% organic cotton.",
+    "category": "Mom & Baby",
+    "image": "https://images.pexels.com/photos/7679720/pexels-photo-7679720.jpeg"
+  },
+  {
+    "id": 8,
+    "title": "Baby First Walkers",
+    "price": 8999,
+    "description": "Adjustable learning shoes with flexible soles and anti-slip pattern. Breathable mesh upper.",
+    "category": "Footwear",
+    "image": "https://images.pexels.com/photos/267320/pexels-photo-267320.jpeg"
+  },
+  {
+    "id": 9,
+    "title": "Sterilizer Bundle",
+    "price": 12999,
+    "description": "3-in-1 electric steam sterilizer for bottles, pacifiers, and small toys. Automatic drying function.",
+    "category": "Feeding",
+    "image": "https://images.pexels.com/photos/4207906/pexels-photo-4207906.jpeg"
+  },
+  {
+    "id": 10,
+    "title": "Personalized Storybooks",
+    "price": 2499,
+    "description": "Customizable children's books featuring your child's name and avatar. Hardcover with anti-tear pages.",
+    "category": "Toys",
+    "image": "https://images.pexels.com/photos/6947408/pexels-photo-6947408.jpeg"
+  }
+]
