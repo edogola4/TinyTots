@@ -1,14 +1,15 @@
-import { Navbar, Main, Product, Footer } from "../components";
+import { Navbar, Main, Footer, Product } from "../components";
 
 function Home() {
   return (
     <>
       <Navbar />
       <Main />
+      {/* Render the Products component */}
       <Product />
       <Footer />
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;

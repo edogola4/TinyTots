@@ -3,7 +3,7 @@ import { Footer, Navbar } from "../components";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+////mport { motion } from "framer-motion";
 
 const Checkout = () => {
   // Retrieve cart items and user details from Redux.
