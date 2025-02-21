@@ -9,7 +9,7 @@ import { FaShoppingCart, FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-const Products = () => {
+const Product = () => {
   const [data, setData] = useState([]);
   const [activeCat, setActiveCat] = useState("All");
   const [loading, setLoading] = useState(false);
@@ -165,7 +165,7 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Product;
 
 /* Styled Components */
 
@@ -340,6 +340,5 @@ const SkeletonWrapper = styled.div`
 const SkeletonCard = styled.div`
   margin-bottom: 2rem;
 `;
-
 
 
