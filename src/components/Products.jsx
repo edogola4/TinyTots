@@ -36,10 +36,8 @@ const Products = () => {
     const getProducts = async () => {
       setLoading(true);
       try {
-        // eslint-disable-next-line no-lone-blocks
-        {/*const response = await fetch("https://fakestoreapi.com/products/");*/}
+        // Fetch product data from Items.json
         const response = await fetch("/Items.json");
-
         if (!response.ok) {
           throw new Error("Failed to fetch products");
         }
@@ -157,7 +155,7 @@ const Products = () => {
         <Greeting>{getGreeting()}</Greeting>
         <Title>Curated Comfort 🧸 </Title>
         <SubTitle>
-        Discover eco-friendly essentials for your little one's adventures 🌱
+          Discover eco-friendly essentials for your little one's adventures 🌱
         </SubTitle>
       </Header>
       {loading ? <LoadingSkeleton /> : <ShowProducts />}
@@ -340,5 +338,3 @@ const SkeletonWrapper = styled.div`
 const SkeletonCard = styled.div`
   margin-bottom: 2rem;
 `;
-
-

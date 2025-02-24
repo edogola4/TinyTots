@@ -5,7 +5,7 @@
     "price": 1499,
     "description": "Ultra-soft bamboo fiber onesies with snap closures for easy diaper changes. Hypoallergenic and perfect for sensitive skin.",
     "category": "Clothing",
-    "image": "https://images.pexels.com/photos/4599765/pexels-photo-4599765.jpeg"
+     "image": "/assets/images/cotton-onesies.png"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "price": 3499,
     "description": "Interactive sensory toys with crinkle fabric, teething rings, and developmental features. Machine washable and BPA-free.",
     "category": "Toys",
-    "image": "https://images.pexels.com/photos/6153385/pexels-photo-6153385.jpeg"
+    "image": "/assets/images/educational-plush-toys.jpg"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "price": 2599,
     "description": "Premium muslin swaddles with custom embroidery. Temperature-regulating fabric for year-round comfort.",
     "category": "Nursery",
-    "image": "https://images.pexels.com/photos/6621338/pexels-photo-6621338.jpeg"
+    "image": "/assets/images/personalized-baby-blankets.png"
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@
     "price": 1899,
     "description": "Complete BPA-free feeding kit with suction bowls, soft-tip spoons, and chewable utensils. Dishwasher safe.",
     "category": "Feeding",
-    "image": "https://images.pexels.com/photos/4207892/pexels-photo-4207892.jpeg"
+    "image": "/assets/images/silicone-feeding-sets.png"
   },
   {
     "id": 5,
