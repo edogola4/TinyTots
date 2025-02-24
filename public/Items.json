@@ -85,7 +85,7 @@
     "price": 19999,
     "description": "HD video monitor with cry detection, temperature sensors, and lullaby player. Night vision and two-way audio.",
     "category": "Nursery",
-    "image": "https://images.pexels.com/photos/7974/pexels-photo.jpg"
+    "image": "/assets/images/smart-baby-monitor.png"
   },
   {
     "id": 12,
