@@ -45,7 +45,7 @@
     "price": 4999,
     "description": "Montessori-inspired learning toy with bead maze, shape sorter, and sensory activities. Non-toxic paints.",
     "category": "Toys",
-    "image": "https://images.pexels.com/photos/4090309/pexels-photo-4090309.jpeg"
+    "image": "/assets/images/wooden-activity-cube.png"
   },
   {
     "id": 7,
