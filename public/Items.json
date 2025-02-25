@@ -145,11 +145,11 @@
   },
   {
     "id": 19,
-    "title": "Digital Ear Thermometer",
+    "title": "Digital Thermometer",
     "price": 3499,
     "description": "1-second forehead thermometer with color-coded fever indicator. Memory function for 10 readings.",
     "category": "Mom & Baby",
-    "image": "https://images.pexels.com/photos/4225920/pexels-photo-4225920.jpeg"
+    "image": "/assets/images/thermometer.png"
   },
   {
     "id": 20,
@@ -157,7 +157,7 @@
     "price": 999,
     "description": "Orthodontic nipple design with ventilation holes. Includes sterilizing case and clip.",
     "category": "Feeding",
-    "image": "https://images.pexels.com/photos/4207899/pexels-photo-4207899.jpeg"
+    "image": "/assets/images/pacifier.png"
   },
   {
     "id": 21,
