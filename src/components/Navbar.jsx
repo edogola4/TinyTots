@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -125,6 +125,13 @@ const Navbar = () => {
     { to: "/about", text: "Story" },
     { to: "/contact", text: "Contact" }
   ];
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isMenuOpen]);
 
   return (
     <NavBar className="navbar navbar-expand-lg">
@@ -217,3 +224,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
