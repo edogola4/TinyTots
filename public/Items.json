@@ -237,7 +237,7 @@
     "price": 899,
     "description": "Cozy mittens designed to keep little hands warm without hindering movement.",
     "category": "Accessories",
-    "image": "https://images.pexels.com/photos/4599770/pexels-photo-4599770.jpeg"
+    "image": "/assets/images/mitten.png"
   },
   {
     "id": 16,
@@ -245,7 +245,7 @@
     "price": 1799,
     "description": "Comfortable and breathable organic cotton T-shirts for toddlers, available in multiple colors.",
     "category": "Clothing",
-    "image": "https://images.pexels.com/photos/4599771/pexels-photo-4599771.jpeg"
+    "image": "/assets/images/t-shirt.png"
   },
   {
     "id": 17,
