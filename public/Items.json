@@ -253,7 +253,7 @@
     "price": 2499,
     "description": "Adorable pajama sets made from soft cotton for a comfortable night's sleep.",
     "category": "Clothing",
-    "image": "https://images.pexels.com/photos/4599772/pexels-photo-4599772.jpeg"
+    "image": "/assets/images/pajama.png"
   },
   {
     "id": 18,
@@ -261,7 +261,7 @@
     "price": 2999,
     "description": "Durable denim overalls designed for active toddlers. Easy to clean and stylish.",
     "category": "Clothing",
-    "image": "https://images.pexels.com/photos/4599773/pexels-photo-4599773.jpeg"
+    "image": "/assets/images/denim.png"
   },
   {
     "id": 19,
