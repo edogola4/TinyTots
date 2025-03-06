@@ -301,7 +301,7 @@
     "price": 3999,
     "description": "Engaging musical toys that introduce your child to sounds and rhythms.",
     "category": "Toys",
-    "image": "https://images.pexels.com/photos/4599778/pexels-photo-4599778.jpeg"
+    "image": "/assets/images/musical.png"
   },
   {
     "id": 24,
