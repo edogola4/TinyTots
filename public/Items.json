@@ -5,7 +5,7 @@
     "price": 1499,
     "description": "Ultra-soft bamboo fiber onesies with snap closures for easy diaper changes. Hypoallergenic and perfect for sensitive skin.",
     "category": "Clothing",
-     "image": "/assets/images/cotton-onesies.png"
+    "image": "/assets/images/cotton-onesies.png"
   },
   {
     "id": 2,
@@ -309,7 +309,7 @@
     "price": 1899,
     "description": "Sensory toys designed to attach to strollers, keeping little ones entertained on the go.",
     "category": "Toys",
-    "image": "https://images.pexels.com/photos/4599779/pexels-photo-4599779.jpeg"
+    "image": "/assets/images/stroller-toys.png"
   },
   {
     "id": 25,
