@@ -213,7 +213,7 @@
     "price": 1299,
     "description": "Soft and warm knit booties hand-crafted for tiny feet. Perfect for winter strolls.",
     "category": "Clothing",
-    "image": "https://images.pexels.com/photos/4599767/pexels-photo-4599767.jpeg"
+    "image": "/assets/images/knit-booties.png"
   },
   {
     "id": 13,
@@ -221,7 +221,7 @@
     "price": 1999,
     "description": "Stylish and durable diaper bags made with recycled materials. Multiple compartments for storage.",
     "category": "Accessories",
-    "image": "https://images.pexels.com/photos/4599768/pexels-photo-4599768.jpeg"
+    "image": "/assets/images/diaper-bag.png"
   },
   {
     "id": 14,
