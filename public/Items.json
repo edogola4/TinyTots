@@ -293,7 +293,7 @@
     "price": 2299,
     "description": "Cuddly plush animals designed for both play and comfort.",
     "category": "Toys",
-    "image": "https://images.pexels.com/photos/4599777/pexels-photo-4599777.jpeg"
+    "image": "/assets/images/animals.png"
   },
   {
     "id": 23,
