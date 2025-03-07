@@ -341,7 +341,7 @@
     "price": 999,
     "description": "Cute, animal-themed teethers made of safe silicone to ease teething discomfort.",
     "category": "Toys",
-    "image": "https://images.pexels.com/photos/4599783/pexels-photo-4599783.jpeg"
+    "image": "/assets/images/teether.png"
   },
   {
     "id": 29,
