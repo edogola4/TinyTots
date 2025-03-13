@@ -477,7 +477,7 @@
     "price": 799,
     "description": "Eco-friendly food pouches for homemade baby food. Easy to clean and reuse.",
     "category": "Feeding",
-    "image": "https://images.pexels.com/photos/4599800/pexels-photo-4599800.jpeg"
+    "image": "/assets/images/food-pouche.png"
   },
   {
     "id": 46,
@@ -485,7 +485,7 @@
     "price": 699,
     "description": "Ergonomically designed utensils perfect for little hands.",
     "category": "Feeding",
-    "image": "https://images.pexels.com/photos/4599801/pexels-photo-4599801.jpeg"
+    "image": ""
   },
   {
     "id": 47,
