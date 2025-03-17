@@ -821,7 +821,7 @@
     "price": 3499,
     "description": "Durable shoes designed to withstand wet weather while keeping tiny feet dry.",
     "category": "Footwear",
-    "image": "https://images.pexels.com/photos/4599843/pexels-photo-4599843.jpeg"
+    "image": "assets/images/rain-shoes.png"
   },
   {
     "id": 89,
@@ -829,7 +829,7 @@
     "price": 2299,
     "description": "Comfortable and breathable sandals designed for active toddlers.",
     "category": "Footwear",
-    "image": "https://images.pexels.com/photos/4599844/pexels-photo-4599844.jpeg"
+    "image": "assets/images/toddler-sandals.png"
   },
   {
     "id": 90,
