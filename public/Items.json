@@ -621,7 +621,7 @@
     "price": 999,
     "description": "Healthy, organic biscuits designed to soothe teething discomfort.",
     "category": "Toys",
-    "image": "https://images.pexels.com/photos/4599818/pexels-photo-4599818.jpeg"
+    "image": "assets/images/biscuits.png"
   },
   {
     "id": 64,
