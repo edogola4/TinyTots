@@ -685,7 +685,7 @@
     "price": 999,
     "description": "Child-safe cutlery sets with ergonomically designed handles.",
     "category": "Feeding",
-    "image": "https://images.pexels.com/photos/4599826/pexels-photo-4599826.jpeg"
+    "image": "assets/images/cutlery-set.png"
   },
   {
     "id": 72,
