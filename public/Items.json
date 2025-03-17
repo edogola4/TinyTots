@@ -629,7 +629,7 @@
     "price": 1099,
     "description": "Nourishing massage oils that help relax and soothe your baby.",
     "category": "Accessories",
-    "image": "assets/massage-oil.png"
+    "image": "assets/images/massage-oil.png"
   },
   {
     "id": 65,
@@ -757,7 +757,7 @@
     "price": 2499,
     "description": "Comfortable and stylish swimwear made from organic materials.",
     "category": "Clothing",
-    "image": "assets/swimwear.png"
+    "image": "assets/images/swimwear.png"
   },
   {
     "id": 81,
