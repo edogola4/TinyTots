@@ -893,7 +893,7 @@
     "price": 3999,
     "description": "Unique, handcrafted wooden toys that double as decor.",
     "category": "Toys",
-    "image": "https://images.pexels.com/photos/4599852/pexels-photo-4599852.jpeg"
+    "image": "assets/images/wooden-toys.png"
   },
   {
     "id": 98,
