@@ -6,7 +6,7 @@ const BRAND_NAME = "TinyTots Boutique";
 
 const COLORS = {
   background: "#fff",
-  primary: "#FF6B6B",       // Changed to a warmer color
+  primary: "#FF6B6B",       // A warmer color
   secondary: "#4ECDC4",     // Added complementary color
   dark: "#2B2B2B",
   lightGrey: "#f3f3f3",
