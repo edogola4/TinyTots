@@ -6,7 +6,7 @@ import Loading from "./Loading";
 //import logoWhite from "../assets/logo_white.jpg"; // Not the right image (kinda ugly)
 import Typed from "typed.js";
 import { Analytics } from "@vercel/analytics/react";
-
+//import styled from "styled-components"
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
