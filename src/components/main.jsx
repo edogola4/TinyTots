@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styled, { keyframes, css } from 'styled-components'; // Add css import
+import styled, { keyframes, css } from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom'; // Added import
 import Loading from "./Loading";
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
   const [activeFeature, setActiveFeature] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef(null);
+  const navigate = useNavigate(); // Added useNavigate
 
   // Features data
   const features = [
@@ -70,6 +72,11 @@ const Home = () => {
     hour: '2-digit',
     minute: '2-digit',
   });
+
+  // Navigation handler
+  const handleNavigateToProducts = () => {
+    navigate('/products');
+  };
 
   // Use the imported Loading component
   if (loading) {
@@ -184,6 +191,7 @@ const Home = () => {
               as={motion.button}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
+              onClick={handleNavigateToProducts} // Added onClick
             >
               Shop Kids Collection
             </PrimaryButton>
@@ -191,6 +199,7 @@ const Home = () => {
               as={motion.button}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
+              onClick={handleNavigateToProducts} // Added onClick
             >
               Shop Women's Collection
             </SecondaryButton>
