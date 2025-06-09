@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import Skeleton from "react-loading-skeleton";
-import { Link, useParams } from "react-router-dom";
-import Marquee from "react-fast-marquee";
-import { useDispatch, useSelector } from "react-redux";
-import { addCart } from "../redux/action";
-import { Footer, Navbar } from "../components";
-import styled from "styled-components";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import { Link, useParams } from 'react-router-dom';
+import Marquee from 'react-fast-marquee';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCart } from '../redux/action';
+import { Footer, Navbar } from '../components';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 const Product = () => {
   const { id } = useParams();
@@ -25,9 +25,8 @@ const Product = () => {
     const fetchProductData = async () => {
       try {
         setLoading(true);
-        // Fetch Items.json from the public folder
-        const response = await fetch("/Items.json");
-        const data = await response.json(); // data is an array of products
+        const response = await fetch('/Items.json');
+        const data = await response.json();
         const productId = parseInt(id, 10);
         const singleProduct = data.find((item) => item.id === productId);
         setProduct(singleProduct);
@@ -35,7 +34,6 @@ const Product = () => {
 
         if (singleProduct && singleProduct.category) {
           setLoadingSimilar(true);
-          // Filter similar products: same category and not the current product
           const filteredSimilarProducts = data.filter(
             (item) =>
               item.category === singleProduct.category && item.id !== singleProduct.id
@@ -44,12 +42,11 @@ const Product = () => {
           setLoadingSimilar(false);
         }
       } catch (error) {
-        console.error("Error fetching product data:", error);
+        console.error('Error fetching product data:', error);
         setLoading(false);
         setLoadingSimilar(false);
       }
     };
-
     fetchProductData();
   }, [id]);
 
@@ -60,74 +57,103 @@ const Product = () => {
         <Skeleton height={400} width={400} />
       </ImageWrapper>
       <InfoWrapper>
-        <Skeleton height={30} width={250} style={{ marginBottom: "1rem" }} />
-        <Skeleton height={90} style={{ marginBottom: "1rem" }} />
-        <Skeleton height={40} width={70} style={{ marginBottom: "1rem" }} />
-        <Skeleton height={50} width={110} style={{ marginBottom: "1rem" }} />
-        <Skeleton height={120} style={{ marginBottom: "1rem" }} />
+        <Skeleton height={30} width={250} style={{ marginBottom: '1rem' }} />
+        <Skeleton height={90} style={{ marginBottom: '1rem' }} />
+        <Skeleton height={40} width={70} style={{ marginBottom: '1rem' }} />
+        <Skeleton height={50} width={110} style={{ marginBottom: '1rem' }} />
+        <Skeleton height={120} style={{ marginBottom: '1rem' }} />
         <Skeleton height={40} width={110} inline={true} />
-        <Skeleton height={40} width={110} style={{ marginLeft: "1rem" }} />
+        <Skeleton height={40} width={110} style={{ marginLeft: '1rem' }} />
       </InfoWrapper>
     </ProductContainer>
   );
 
-  // Main product display with a fallback check for product existence
+  // Main product display
   const ShowProduct = () => {
     if (!product) {
       return <FallbackMessage>Product not found.</FallbackMessage>;
     }
     return (
-      <ProductContainer>
+      <ProductContainer
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        role="article"
+        aria-labelledby="product-title"
+      >
         {user && user.name && (
           <WelcomeMessage>Welcome back, {user.name}!</WelcomeMessage>
         )}
         <ImageWrapper>
           <ProductImage
+            as={motion.img}
             src={product.image}
-            alt={product.title || "Product Image"}
+            alt={`Eco-friendly ${product.title || product.name}`}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.6 }}
           />
         </ImageWrapper>
         <InfoWrapper>
-          <CategoryText>{product.category?.toUpperCase() || "CATEGORY"}</CategoryText>
-          <Title>{product.title}</Title>
+          <CategoryText>{product.category?.toUpperCase() || 'CATEGORY'}</CategoryText>
+          <Title id="product-title">{product.title || product.name}</Title>
           <RatingText>
-            {product.rating && product.rating.rate} <i className="fa fa-star" />
+            {product.rating && product.rating.rate} <i className="fa fa-star" aria-hidden="true" />
           </RatingText>
-          <PriceText>${product.price}</PriceText>
+          <PriceText>KSH{product.price}</PriceText>
           <Description>{product.description}</Description>
           <ButtonGroup>
-            <ActionButton onClick={() => addProduct(product)}>
+            <ActionButton
+              as={motion.button}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => addProduct(product)}
+              aria-label={`Add ${product.title || product.name} to cart`}
+            >
               Add to Cart
             </ActionButton>
-            <StyledLink to="/cart">Go to Cart</StyledLink>
+            <StyledLink to="/cart" aria-label="Go to shopping cart">
+              Go to Cart
+            </StyledLink>
           </ButtonGroup>
         </InfoWrapper>
       </ProductContainer>
     );
   };
 
-  // Skeleton loading component for similar products
+  // Skeleton loading for similar products
   const LoadingSimilar = () => (
     <SimilarContainer>
-      <Skeleton height={400} width={250} count={4} style={{ margin: "0 10px" }} />
+      <Skeleton height={400} width={250} count={4} style={{ margin: '0 10px' }} />
     </SimilarContainer>
   );
 
-  // Display similar products in a horizontal marquee
+  // Display similar products in a marquee
   const ShowSimilarProduct = () => (
     <SimilarWrapper>
       <SimilarTitle>You may also like</SimilarTitle>
       <Marquee pauseOnHover={true} pauseOnClick={true} speed={50}>
         {similarProducts.map((item) => (
-          <SimilarCard key={item.id}>
-            <SimilarImage src={item.image} alt={item.title} />
+          <SimilarCard
+            key={item.id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <SimilarImage src={item.image} alt={`Eco-friendly ${item.title || item.name}`} />
             <SimilarInfo>
-              <SimilarName>{item.title.substring(0, 15)}...</SimilarName>
+              <SimilarName>{(item.title || item.name).substring(0, 15)}...</SimilarName>
               <SimilarActions>
                 <StyledLinkSmall to={`/product/${item.id}`}>
                   Buy Now
                 </StyledLinkSmall>
-                <ActionButtonSmall onClick={() => addProduct(item)}>
+                <ActionButtonSmall
+                  as={motion.button}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => addProduct(item)}
+                  aria-label={`Add ${item.title || item.name} to cart`}
+                >
                   Add to Cart
                 </ActionButtonSmall>
               </SimilarActions>
@@ -141,28 +167,50 @@ const Product = () => {
   return (
     <>
       <Navbar />
-      {loading ? <LoadingComponent /> : <ShowProduct />}
-      <SectionWrapper>
-        {loadingSimilar ? <LoadingSimilar /> : <ShowSimilarProduct />}
-      </SectionWrapper>
+      <MainContainer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        role="main"
+        aria-labelledby="product-title"
+      >
+        {loading ? <LoadingComponent /> : <ShowProduct />}
+        <SectionWrapper>
+          {loadingSimilar ? <LoadingSimilar /> : <ShowSimilarProduct />}
+        </SectionWrapper>
+      </MainContainer>
       <Footer />
     </>
   );
 };
 
-export default Product;
-
 /* Styled Components */
+const MainContainer = styled(motion.div)`
+  background: linear-gradient(135deg, #d4e4d9, #f0f7f4);
+  min-height: 80vh;
+  padding: 4rem 1rem;
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
+  @media (max-width: 480px) {
+    padding: 1.5rem 0.5rem;
+  }
+`;
+
 const ProductContainer = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   margin: 3rem auto;
   padding: 2rem;
   max-width: 1200px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  box-shadow: 0 8px 32px rgba(0, 128, 0, 0.1);
   backdrop-filter: blur(8px);
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -171,6 +219,7 @@ const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 250px;
 `;
 
 const ProductImage = styled.img`
@@ -186,52 +235,69 @@ const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const WelcomeMessage = styled.h2`
   width: 100%;
   text-align: center;
-  color: #d35400;
-  font-family: "Montserrat", sans-serif;
+  color: #2d6a4f;
+  font-family: 'Montserrat', sans-serif;
   margin-bottom: 1rem;
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const FallbackMessage = styled.h2`
   width: 100%;
   text-align: center;
   color: #e74c3c;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 2rem 0;
 `;
 
 const CategoryText = styled.h4`
-  color: #999;
+  color: #52796f;
   margin-bottom: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
 `;
 
 const Title = styled.h1`
   font-size: 2rem;
-  color: #333;
+  color: #2d6a4f;
   margin-bottom: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  @media (max-width: 480px) {
+    font-size: 1.8rem;
+  }
 `;
 
 const RatingText = styled.p`
   font-size: 1.1rem;
-  color: #f39c12;
+  color: #95d5b2;
   margin-bottom: 1rem;
 `;
 
 const PriceText = styled.h3`
   font-size: 1.8rem;
-  color: #d35400;
+  color: #1b4332;
   margin-bottom: 1rem;
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Description = styled.p`
   font-size: 1rem;
-  color: #555;
+  color: #52796f;
   line-height: 1.6;
   margin-bottom: 2rem;
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const ButtonGroup = styled.div`
@@ -242,28 +308,33 @@ const ButtonGroup = styled.div`
 
 const ActionButton = styled.button`
   padding: 0.8rem 1.5rem;
-  background: linear-gradient(45deg, #ff6b6b, #f39c12);
+  background: #2d6a4f;
   color: #fff;
   border: none;
-  border-radius: 50px;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
-  transition: transform 0.3s ease;
-  &:hover {
-    transform: scale(1.05);
+  font-family: 'Montserrat', sans-serif;
+  &:focus {
+    outline: 2px solid #52796f;
+    outline-offset: 2px;
   }
 `;
 
 const StyledLink = styled(Link)`
   padding: 0.8rem 1.5rem;
-  background: #333;
+  background: #52796f;
   color: #fff;
   text-decoration: none;
-  border-radius: 50px;
+  border-radius: 10px;
   font-weight: bold;
-  transition: background 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
   &:hover {
-    background: #555;
+    background: #2d6a4f;
+  }
+  &:focus {
+    outline: 2px solid #2d6a4f;
+    outline-offset: 2px;
   }
 `;
 
@@ -279,9 +350,12 @@ const SimilarWrapper = styled.div`
 
 const SimilarTitle = styled.h2`
   text-align: center;
-  color: #d35400;
-  font-family: "Montserrat", sans-serif;
+  color: #2d6a4f;
+  font-family: 'Montserrat', sans-serif;
   margin-bottom: 2rem;
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const SimilarContainer = styled.div`
@@ -290,12 +364,12 @@ const SimilarContainer = styled.div`
   gap: 1rem;
 `;
 
-const SimilarCard = styled.div`
-  background: #fff;
+const SimilarCard = styled(motion.div)`
+  background: #f0f7f4;
   border-radius: 16px;
   overflow: hidden;
   width: 250px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 128, 0, 0.1);
   margin: 0 10px;
 `;
 
@@ -313,7 +387,8 @@ const SimilarInfo = styled.div`
 const SimilarName = styled.h5`
   font-size: 1rem;
   margin-bottom: 1rem;
-  color: #333;
+  color: #2d6a4f;
+  font-family: 'Montserrat', sans-serif;
 `;
 
 const SimilarActions = styled.div`
@@ -324,29 +399,36 @@ const SimilarActions = styled.div`
 
 const StyledLinkSmall = styled(Link)`
   padding: 0.5rem 1rem;
-  background: #333;
+  background: #52796f;
   color: #fff;
   text-decoration: none;
-  border-radius: 50px;
+  border-radius: 10px;
   font-weight: bold;
   font-size: 0.9rem;
-  transition: background 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
   &:hover {
-    background: #555;
+    background: #2d6a4f;
+  }
+  &:focus {
+    outline: 2px solid #2d6a4f;
+    outline-offset: 2px;
   }
 `;
 
 const ActionButtonSmall = styled.button`
   padding: 0.5rem 1rem;
-  background: linear-gradient(45deg, #ff6b6b, #f39c12);
+  background: #2d6a4f;
   color: #fff;
   border: none;
-  border-radius: 50px;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
   font-size: 0.9rem;
-  transition: transform 0.3s ease;
-  &:hover {
-    transform: scale(1.05);
+  font-family: 'Montserrat', sans-serif;
+  &:focus {
+    outline: 2px solid #52796f;
+    outline-offset: 2px;
   }
 `;
+
+export default Product;
