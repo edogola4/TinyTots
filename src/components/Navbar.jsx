@@ -1,11 +1,11 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-// eslint-disable-next-line no-unused-vars
-import { FiShoppingCart, FiLogIn, FiUserPlus, FiMenu, FiX } from 'react-icons/fi';
+import { FiShoppingCart, FiLogIn, FiMenu, FiX } from 'react-icons/fi';
 
+// Move to styles/NavbarStyles.js
 const NavBar = styled.nav`
   background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(12px);
@@ -108,29 +108,61 @@ const MobileMenu = styled(motion.div)`
   top: 70px;
   right: 0;
   width: 100%;
+  max-width: 300px;
   background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(12px);
   padding: 2rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  @media (max-width: 576px) {
+    padding: 1.5rem;
+  }
 `;
 
+const mobileMenuVariants = {
+  hidden: { opacity: 0, y: -20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { staggerChildren: 0.1 },
+  },
+  exit: { opacity: 0, y: -20 },
+};
+
+const menuItemVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { opacity: 1, x: 0 },
+};
+
+const NavLinkItem = ({ to, text, onClick }) => (
+  <li className="nav-item">
+    <NavItem
+      to={to}
+      className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+      onClick={onClick}
+      aria-current={({ isActive }) => isActive ? 'page' : undefined}
+    >
+      {text}
+    </NavItem>
+  </li>
+);
+
 const Navbar = () => {
-  const cartItems = useSelector(state => state.handleCart);
+  const cartItems = useSelector(state => state.handleCart ?? []);
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const navLinks = [
+  const navLinks = useMemo(() => [
     { to: "/", text: "Home" },
     { to: "/products", text: "Shop" },
     { to: "/about", text: "Story" },
-    { to: "/contact", text: "Contact" }
-  ];
+    { to: "/contact", text: "Contact" },
+  ], []);
+
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
+    return () => {
       document.body.style.overflow = 'auto';
-    }
+    };
   }, [isMenuOpen]);
 
   return (
@@ -145,6 +177,8 @@ const Navbar = () => {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
         >
           {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
         </motion.button>
@@ -152,14 +186,7 @@ const Navbar = () => {
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mx-auto gap-2">
             {navLinks.map((link) => (
-              <li className="nav-item" key={link.text}>
-                <NavItem 
-                  to={link.to}
-                  className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-                >
-                  {link.text}
-                </NavItem>
-              </li>
+              <NavLinkItem key={link.text} to={link.to} text={link.text} />
             ))}
           </ul>
 
@@ -199,20 +226,22 @@ const Navbar = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <MobileMenu
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={mobileMenuVariants}
             >
               <div className="d-flex flex-column gap-3">
                 {navLinks.map((link) => (
-                  <NavItem 
-                    key={link.text}
-                    to={link.to}
-                    className="nav-link"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.text}
-                  </NavItem>
+                  <motion.div key={link.text} variants={menuItemVariants}>
+                    <NavItem
+                      to={link.to}
+                      className="nav-link"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {link.text}
+                    </NavItem>
+                  </motion.div>
                 ))}
               </div>
             </MobileMenu>
@@ -224,6 +253,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
 
 
