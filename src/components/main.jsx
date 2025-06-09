@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom'; // Added import
+import { useNavigate } from 'react-router-dom';
 import Loading from "./Loading";
 
 const Home = () => {
@@ -10,7 +10,7 @@ const Home = () => {
   const [activeFeature, setActiveFeature] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef(null);
-  const navigate = useNavigate(); // Added useNavigate
+  const navigate = useNavigate();
 
   // Features data
   const features = [
@@ -56,6 +56,21 @@ const Home = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Tawk.to chat widget
+  useEffect(() => {
+    window.Tawk_API = window.Tawk_API || {};
+    window.Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script");
+      var s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = "https://embed.tawk.to/671b6bef2480f5b4f593ad9d/1ib1hr8va";
+      s1.charset = "UTF-8";
+      s1.setAttribute("crossorigin", "*");
+      s0.parentNode.insertBefore(s1, s0);
+    })();
   }, []);
 
   // Greeting based on time
@@ -191,7 +206,7 @@ const Home = () => {
               as={motion.button}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              onClick={handleNavigateToProducts} // Added onClick
+              onClick={handleNavigateToProducts}
             >
               Shop Kids Collection
             </PrimaryButton>
@@ -199,7 +214,7 @@ const Home = () => {
               as={motion.button}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              onClick={handleNavigateToProducts} // Added onClick
+              onClick={handleNavigateToProducts}
             >
               Shop Women's Collection
             </SecondaryButton>
