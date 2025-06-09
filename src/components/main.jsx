@@ -322,7 +322,7 @@ const Home = () => {
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
         </ScrollWheel>
-        <ScrollText>Scroll to explore</ScrollText>
+        <ScrollText>Click to explore</ScrollText>
       </ScrollIndicator>
     </HeroContainer>
   );
