@@ -23,6 +23,8 @@ import {
   Register,
   Checkout,
   PageNotFound,
+  Dashboard,
+  ForgotPassword,
 } from "./pages";
 
 // Import custom components
@@ -51,6 +53,10 @@ root.render(
           {/* Fallback routes for unknown paths */}
           <Route path="*" element={<PageNotFound />} />
           <Route path="/product/*" element={<PageNotFound />} />
+
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          
         </Routes>
       </Provider>
     </ScrollToTop>

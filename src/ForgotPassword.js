@@ -1,56 +1,36 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Footer, Navbar } from "../components"; // Fixed path
+import { Footer, Navbar } from "./components";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "./firebase";
 
-const registerUser = async (email, password) => {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-    return { success: true, user: { email: user.email, uid: user.uid } };
-  } catch (error) {
-    throw new Error(error.message || "Registration failed. Try again.");
-  }
-};
-
-const Register = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
   const [status, setStatus] = useState({ loading: false, error: null, success: false });
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleRegister = async (e) => {
+  const handleReset = async (e) => {
     e.preventDefault();
     setStatus({ loading: true, error: null, success: false });
 
-    if (!formData.email.trim() || !formData.password.trim()) {
-      setStatus({ loading: false, error: "All fields are required.", success: false });
+    if (!email.trim()) {
+      setStatus({ loading: false, error: "Email is required.", success: false });
       return;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
+    if (!emailRegex.test(email)) {
       setStatus({ loading: false, error: "Please enter a valid email.", success: false });
-      return;
-    }
-    if (formData.password.length < 6) {
-      setStatus({ loading: false, error: "Password must be at least 6 characters.", success: false });
       return;
     }
 
     try {
-      // Removed unused 'result' variable - just call the function
-      await registerUser(formData.email, formData.password);
+      await sendPasswordResetEmail(auth, email);
       setStatus({ loading: false, error: null, success: true });
-      setTimeout(() => navigate("/login"), 1000);
+      setTimeout(() => navigate("/login"), 2000);
     } catch (error) {
-      setStatus({ loading: false, error: error.message, success: false });
+      setStatus({ loading: false, error: error.message || "Reset failed. Try again.", success: false });
     }
   };
 
@@ -64,9 +44,9 @@ const Register = () => {
         role="main"
       >
         <ContentWrapper>
-          <Title>Join TinyTots!</Title>
+          <Title>Reset Password</Title>
           <Subtitle>
-            Create an account to get started.
+            Enter your email to receive a password reset link.
           </Subtitle>
           <Divider />
           {status.loading && <Spinner aria-label="Loading, please wait" />}
@@ -78,11 +58,11 @@ const Register = () => {
               transition={{ duration: 0.5, ease: "easeOut" }}
               role="alert"
             >
-              🎉 Registration successful! Redirecting to login...
+              🎉 Reset email sent! Check your inbox and redirecting...
             </SuccessMessage>
           )}
           {!status.success && (
-            <StyledForm onSubmit={handleRegister} noValidate>
+            <StyledForm onSubmit={handleReset} noValidate>
               <FormField>
                 <Label htmlFor="emailInput">Email address</Label>
                 <Input
@@ -90,22 +70,8 @@ const Register = () => {
                   id="emailInput"
                   name="email"
                   placeholder="name@example.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  aria-required="true"
-                  disabled={status.loading}
-                />
-              </FormField>
-              <FormField>
-                <Label htmlFor="passwordInput">Password</Label>
-                <Input
-                  type="password"
-                  id="passwordInput"
-                  name="password"
-                  placeholder="Password"
-                  value={formData.password}
-                  onChange={handleChange}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   aria-required="true"
                   disabled={status.loading}
@@ -113,14 +79,14 @@ const Register = () => {
               </FormField>
               <FormLinks>
                 <p>
-                  Already have an account?{" "}
+                  Back to{" "}
                   <StyledLink to="/login" aria-label="Log in to your account">
                     Login
                   </StyledLink>
                 </p>
               </FormLinks>
               <Button type="submit" disabled={status.loading}>
-                {status.loading ? "Registering..." : "Register"}
+                {status.loading ? "Sending..." : "Send Reset Email"}
               </Button>
             </StyledForm>
           )}
@@ -131,7 +97,6 @@ const Register = () => {
   );
 };
 
-/* Styled Components */
 const PageContainer = styled(motion.div)`
   background: linear-gradient(135deg, #e6f0ff, #f0f7ff);
   min-height: 80vh;
@@ -293,4 +258,4 @@ const Button = styled.button`
   }
 `;
 
-export default Register;
+export default ForgotPassword;
