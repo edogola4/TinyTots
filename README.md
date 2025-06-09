@@ -7,6 +7,12 @@
 
 A modern e-commerce platform specializing in eco-friendly children's and women's clothing, featuring immersive animations, responsive design, and seamless navigation.
 
+## Screenshots
+
+| Home Page | Products Page | Navbar |
+|-----------|---------------|--------|
+| ![Home Page](public/screenshots/home-page.png) | ![Products Page](public/screenshots/products-page.png) | ![Navbar](public/screenshots/story.png) |
+
 ## Features
 
 - 🌟 **Dynamic Hero Section**: Interactive greeting and time display with parallax background effects using Framer Motion.
@@ -20,11 +26,7 @@ A modern e-commerce platform specializing in eco-friendly children's and women's
 - 📦 **Product Listings**: Filterable product listings powered by the Fake Store API (to be replaced with a custom API in production).
 - 🧭 **Seamless Navigation**: CTA buttons and navbar links for easy access to the products section.
 
-## Screenshots
 
-| Home Page | Products Page | Navbar |
-|-----------|---------------|--------|
-| ![Home Page](public/screenshots/home-page.png) | ![Products Page](public/screenshots/products-page.png) | ![Navbar](public/screenshots/story.png) |
 
 ## Project Structure
 tinytots-boutique/ ├── src/ │ ├── components/ │ │ ├── Home.jsx # Landing page with dynamic effects │ │ ├── Navbar.jsx # Responsive navbar with cart │ │ ├── Products.jsx # Product listing and filtering │ │ ├── Loading.js # Animated loading screen │ │ ├── Footer.js # Branded footer │ ├── redux/ │ │ ├── cartSlice.js # Cart management with Redux │ ├── styles/ │ │ ├── NavbarStyles.js # Navbar styled-components │ ├── App.jsx # Main app with routing │ ├── index.js # Entry point ├── public/ │ ├── index.html # HTML template ├── screenshots/ │ ├── home-page.png # Home page screenshot │ ├── products-page.png # Products page screenshot │ ├── navbar.png # Navbar screenshot ├── package.json # Dependencies and scripts ├── README.md # Project documentation
