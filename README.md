@@ -24,7 +24,7 @@ A modern e-commerce platform specializing in eco-friendly children's and women's
 
 | Home Page | Products Page | Navbar |
 |-----------|---------------|--------|
-| ![Home Page](screenshots/home-page.png) | ![Products Page](screenshots/products-page.png) | ![Navbar](screenshots/navbar.png) |
+| ![Home Page](public/screenshots/home-page.png) | ![Products Page](public/screenshots/products-page.png) | ![Navbar](public/screenshots/story.png) |
 
 ## Project Structure
 tinytots-boutique/ ├── src/ │ ├── components/ │ │ ├── Home.jsx # Landing page with dynamic effects │ │ ├── Navbar.jsx # Responsive navbar with cart │ │ ├── Products.jsx # Product listing and filtering │ │ ├── Loading.js # Animated loading screen │ │ ├── Footer.js # Branded footer │ ├── redux/ │ │ ├── cartSlice.js # Cart management with Redux │ ├── styles/ │ │ ├── NavbarStyles.js # Navbar styled-components │ ├── App.jsx # Main app with routing │ ├── index.js # Entry point ├── public/ │ ├── index.html # HTML template ├── screenshots/ │ ├── home-page.png # Home page screenshot │ ├── products-page.png # Products page screenshot │ ├── navbar.png # Navbar screenshot ├── package.json # Dependencies and scripts ├── README.md # Project documentation
