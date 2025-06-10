@@ -9,6 +9,7 @@ const Home = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [activeFeature, setActiveFeature] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isChatVisible, setIsChatVisible] = useState(true); // State for widget visibility
   const heroRef = useRef(null);
   const navigate = useNavigate();
 
@@ -58,20 +59,71 @@ const Home = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Tawk.to chat widget
+  // Tawk.to chat widget with custom features
   useEffect(() => {
-    window.Tawk_API = window.Tawk_API || {};
-    window.Tawk_LoadStart = new Date();
-    (function () {
-      var s1 = document.createElement("script");
-      var s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/671b6bef2480f5b4f593ad9d/1ib1hr8va";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  }, []);
+    if (!window.Tawk_API) {
+      window.Tawk_API = {};
+      window.Tawk_LoadStart = new Date();
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://embed.tawk.to/671b6bef2480f5b4f593ad9d/1ib1hr8va";
+      script.charset = "UTF-8";
+      script.setAttribute("crossorigin", "*");
+      script.onerror = () => console.error("Failed to load Tawk.to script");
+
+      // Configure Tawk.to features on load
+      window.Tawk_API.onLoad = function () {
+        // Pre-chat form configuration
+        window.Tawk_API.setPrechatForm({
+          enabled: true,
+          fields: [
+            { key: "name", label: "Name", required: true, type: "text" },
+            { key: "email", label: "Email", required: true, type: "email" },
+            { key: "message", label: "How can we help?", required: false, type: "textarea" },
+          ],
+        });
+
+        // Set visitor attributes
+        window.Tawk_API.setAttributes({
+          page: "Home Page",
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          localTime: currentTime.toLocaleString("en-US", { timeZone: "Africa/Nairobi" }),
+        }, (error) => {
+          if (error) console.error("Tawk.to setAttributes error:", error);
+        });
+
+        // Control initial visibility
+        if (!isChatVisible) {
+          window.Tawk_API.hideWidget();
+        }
+      };
+
+      const firstScript = document.getElementsByTagName("script")[0];
+      firstScript.parentNode.insertBefore(script, firstScript);
+    }
+  }, [currentTime, isChatVisible]);
+
+  // Toggle chat widget visibility
+  const toggleChatVisibility = () => {
+    if (window.Tawk_API) {
+      setIsChatVisible((prev) => {
+        const newVisibility = !prev;
+        if (newVisibility) {
+          window.Tawk_API.showWidget();
+        } else {
+          window.Tawk_API.hideWidget();
+        }
+        return newVisibility;
+      });
+    }
+  };
+
+  // Trigger chat widget
+  const openChat = () => {
+    if (window.Tawk_API) {
+      window.Tawk_API.maximize();
+    }
+  };
 
   // Greeting based on time
   const getGreeting = () => {
@@ -218,6 +270,14 @@ const Home = () => {
             >
               Shop Women's Collection
             </SecondaryButton>
+            <SupportButton
+              as={motion.button}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={openChat}
+            >
+              Contact Support
+            </SupportButton>
           </ButtonContainer>
 
           {/* Trust Indicators */}
@@ -240,6 +300,17 @@ const Home = () => {
               <TrustLabel>Customer Rating</TrustLabel>
             </TrustItem>
           </TrustIndicators>
+
+          {/* Chat Toggle Button */}
+          <ChatToggleButton
+            as={motion.button}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={toggleChatVisibility}
+            isVisible={isChatVisible}
+          >
+            {isChatVisible ? 'Hide Chat' : 'Show Chat'}
+          </ChatToggleButton>
         </LeftContent>
 
         {/* Right Visual */}
@@ -503,6 +574,7 @@ const ButtonContainer = styled.div`
   
   @media (min-width: 640px) {
     flex-direction: row;
+    flex-wrap: wrap;
   }
 `;
 
@@ -537,6 +609,43 @@ const SecondaryButton = styled.button`
   
   &:hover {
     box-shadow: 0 25px 50px rgba(59, 130, 246, 0.4);
+  }
+`;
+
+const SupportButton = styled.button`
+  padding: 1rem 2rem;
+  background: linear-gradient(45deg, #ec4899, #f43f5e);
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  box-shadow: 0 20px 40px rgba(236, 72, 153, 0.3);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: 0 25px 50px rgba(236, 72, 153, 0.4);
+  }
+`;
+
+const ChatToggleButton = styled.button`
+  padding: 0.75rem 1.5rem;
+  background: ${props => props.isVisible 
+    ? 'linear-gradient(45deg, #f59e0b, #f97316)' 
+    : 'linear-gradient(45deg, #6b7280, #4b5563)'};
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
   }
 `;
 
