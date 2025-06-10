@@ -13,3 +13,10 @@ export const delCart = (product) =>{
         payload:product
     }
 }
+
+// Clear entire cart
+export const clearCart = () => {
+  return {
+    type: "CLEAR_CART"
+  }
+}
