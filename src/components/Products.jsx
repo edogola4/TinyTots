@@ -83,66 +83,84 @@ const Products = () => {
   );
 
   // Main products display with animations and modern styling
-  const ShowProducts = () => (
-    <>
-      <FilterContainer>
-        {["All", "Clothing", "Toys", "Nursery", "Feeding", "Accessories", "Mom & Baby", "Footwear"].map((cat) => (
-          <FilterButton
-            key={cat}
-            className={activeCat === cat ? "active" : ""}
-            onClick={() => handleFilter(cat)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {cat === "All" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
-          </FilterButton>
-        ))}
-      </FilterContainer>
-      <GridContainer>
-        {filteredProducts.map((product) => (
-          <ProductCard 
-            key={product.id}
-            whileHover={{ y: -10, scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <ImageContainer>
-              <ProductImage 
-                src={product.image}
-                alt={product.title || "Product image"}
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.3 }}
-              />
-            </ImageContainer>
-            <CardContent>
-              <ProductTitle>
-                {product.title.substring(0, 12)}...
-              </ProductTitle>
-              <ProductDescription>
-                {product.description.substring(0, 90)}...
-              </ProductDescription>
-            </CardContent>
-            <PriceTag>KSH {product.price}</PriceTag>
-            <CardFooter>
-              <StyledLink
-                to={`/product/${product.id}`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+  const ShowProducts = () => {
+    // Create a map to track seen product IDs and add a suffix if duplicates exist
+    const productKeyMap = new Map();
+    
+    return (
+      <>
+        <FilterContainer>
+          {["All", "Clothing", "Toys", "Nursery", "Feeding", "Accessories", "Mom & Baby", "Footwear"].map((cat) => (
+            <FilterButton
+              key={cat}
+              className={activeCat === cat ? "active" : ""}
+              onClick={() => handleFilter(cat)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {cat === "All" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
+            </FilterButton>
+          ))}
+        </FilterContainer>
+        <GridContainer>
+          {filteredProducts.map((product, index) => {
+            // Generate a unique key for each product
+            let key = product.id || `product-${index}`;
+            // If we've seen this ID before, add a suffix
+            if (productKeyMap.has(key)) {
+              const count = productKeyMap.get(key) + 1;
+              productKeyMap.set(key, count);
+              key = `${key}-${count}`;
+            } else {
+              productKeyMap.set(key, 0);
+            }
+            
+            return (
+              <ProductCard 
+                key={key}
+                whileHover={{ y: -10, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
-                Buy Now <FaArrowRight />
-              </StyledLink>
-              <StyledButton
-                onClick={() => addProduct(product)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <FaShoppingCart /> Add to Cart
-              </StyledButton>
-            </CardFooter>
-          </ProductCard>
-        ))}
-      </GridContainer>
-    </>
-  );
+                <ImageContainer>
+                  <ProductImage 
+                    src={product.image}
+                    alt={product.title || "Product image"}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </ImageContainer>
+                <CardContent>
+                  <ProductTitle>
+                    {product.title.substring(0, 12)}...
+                  </ProductTitle>
+                  <ProductDescription>
+                    {product.description.substring(0, 90)}...
+                  </ProductDescription>
+                </CardContent>
+                <PriceTag>KSH {product.price}</PriceTag>
+                <CardFooter>
+                  <StyledLink
+                    to={`/product/${product.id}`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Buy Now <FaArrowRight />
+                  </StyledLink>
+                  <StyledButton
+                    onClick={() => addProduct(product)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <FaShoppingCart /> Add to Cart
+                  </StyledButton>
+                </CardFooter>
+              </ProductCard>
+            );
+          })}
+        </GridContainer>
+      </>
+    );
+  };
 
   return (
     <PageContainer
