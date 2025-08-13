@@ -69,11 +69,43 @@ A modern, responsive e-commerce platform specializing in eco-friendly children's
 4. **Open in browser**
    The application will be available at [http://localhost:3000](http://localhost:3000)
 
+### Backend Setup
+
+1. **Navigate to the server directory**
+   ```bash
+   cd server
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Set up environment variables**
+   - Create a `.env` file in the `server` directory
+   - Add the following variables:
+     ```
+     PORT=5000
+     MONGODB_URI=your_mongodb_connection_string
+     JWT_SECRET=your_jwt_secret
+     ```
+
+4. **Start the backend server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+   The API will be available at [http://localhost:5000](http://localhost:5000)
+
 ## 🛠️ Technologies Used
 
 | Category | Technologies |
 |----------|--------------|
 | **Core** | React 18, React Router 6 |
+| **Backend** | Node.js, Express, MongoDB, JWT |
 | **Styling** | styled-components, CSS3 |
 | **State Management** | Redux Toolkit |
 | **Animations** | Framer Motion |
@@ -85,7 +117,17 @@ A modern, responsive e-commerce platform specializing in eco-friendly children's
 
 ```
 tinytots-boutique/
-├── public/                 # Static files
+├── server/                 # Backend server
+│   ├── src/
+│   │   ├── config/        # Configuration files
+│   │   ├── controllers/   # Request handlers
+│   │   ├── middleware/    # Custom middleware
+│   │   ├── models/        # Database models
+│   │   ├── routes/        # API routes
+│   │   └── utils/         # Utility functions
+│   ├── server.js          # Entry point
+│   └── package.json       # Backend dependencies
+├── public/                # Static files
 ├── src/
 │   ├── assets/            # Images, fonts, and other static assets
 │   ├── components/        # Reusable UI components
@@ -98,6 +140,16 @@ tinytots-boutique/
 │   ├── utils/            # Utility functions
 │   ├── App.jsx           # Main application component
 │   └── index.js          # Application entry point
+├── server/
+│   ├── src/
+│   │   ├── config/       # Configuration files
+│   │   ├── controllers/ # Request handlers
+│   │   ├── middleware/  # Custom middleware
+│   │   ├── models/      # Database models
+│   │   ├── routes/      # API routes
+│   │   └── utils/       # Utility functions
+│   ├── server.js        # Entry point
+│   └── package.json     # Dependencies and scripts
 ├── .gitignore
 ├── package.json
 └── README.md

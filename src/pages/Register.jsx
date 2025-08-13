@@ -1,24 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Footer, Navbar } from "../components"; // Fixed path
+import { Footer, Navbar } from "../components";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase";
-
-const registerUser = async (email, password) => {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-    return { success: true, user: { email: user.email, uid: user.uid } };
-  } catch (error) {
-    throw new Error(error.message || "Registration failed. Try again.");
-  }
-};
+import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ 
+    name: "",
+    email: "", 
+    password: "",
+    confirmPassword: ""
+  });
   const [status, setStatus] = useState({ loading: false, error: null, success: false });
+  const { register } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -30,24 +25,36 @@ const Register = () => {
     e.preventDefault();
     setStatus({ loading: true, error: null, success: false });
 
-    if (!formData.email.trim() || !formData.password.trim()) {
+    // Form validation
+    if (!formData.name.trim() || !formData.email.trim() || !formData.password || !formData.confirmPassword) {
       setStatus({ loading: false, error: "All fields are required.", success: false });
       return;
     }
+
+    if (formData.password !== formData.confirmPassword) {
+      setStatus({ loading: false, error: "Passwords do not match.", success: false });
+      return;
+    }
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       setStatus({ loading: false, error: "Please enter a valid email.", success: false });
       return;
     }
+
     if (formData.password.length < 6) {
       setStatus({ loading: false, error: "Password must be at least 6 characters.", success: false });
       return;
     }
 
     try {
-      // Removed unused 'result' variable - just call the function
-      await registerUser(formData.email, formData.password);
+      await register({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password
+      });
       setStatus({ loading: false, error: null, success: true });
+      navigate("/" || "/dashboard");
       setTimeout(() => navigate("/login"), 1000);
     } catch (error) {
       setStatus({ loading: false, error: error.message, success: false });
@@ -84,33 +91,61 @@ const Register = () => {
           {!status.success && (
             <StyledForm onSubmit={handleRegister} noValidate>
               <FormField>
-                <Label htmlFor="emailInput">Email address</Label>
+                <Label htmlFor="name">Full Name</Label>
+                <Input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Enter your full name"
+                  required
+                  disabled={status.loading}
+                />
+              </FormField>
+              
+              <FormField>
+                <Label htmlFor="email">Email</Label>
                 <Input
                   type="email"
-                  id="emailInput"
+                  id="email"
                   name="email"
-                  placeholder="name@example.com"
                   value={formData.email}
                   onChange={handleChange}
+                  placeholder="Enter your email"
                   required
-                  aria-required="true"
                   disabled={status.loading}
                 />
               </FormField>
+              
               <FormField>
-                <Label htmlFor="passwordInput">Password</Label>
+                <Label htmlFor="password">Password</Label>
                 <Input
                   type="password"
-                  id="passwordInput"
+                  id="password"
                   name="password"
-                  placeholder="Password"
                   value={formData.password}
                   onChange={handleChange}
+                  placeholder="Create a password (min 6 characters)"
                   required
-                  aria-required="true"
                   disabled={status.loading}
                 />
               </FormField>
+              
+              <FormField>
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Confirm your password"
+                  required
+                  disabled={status.loading}
+                />
+              </FormField>
+              
               <FormLinks>
                 <p>
                   Already have an account?{" "}
@@ -119,7 +154,13 @@ const Register = () => {
                   </StyledLink>
                 </p>
               </FormLinks>
-              <Button type="submit" disabled={status.loading}>
+              
+              <Button 
+                type="submit" 
+                disabled={status.loading}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
                 {status.loading ? "Registering..." : "Register"}
               </Button>
             </StyledForm>
