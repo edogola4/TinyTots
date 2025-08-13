@@ -3,7 +3,16 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiShoppingCart, FiLogIn, FiMenu, FiX } from 'react-icons/fi';
+import { 
+  FiShoppingCart, 
+  FiLogIn, 
+  FiMenu, 
+  FiX, 
+  FiUser, 
+  FiLogOut,
+  FiUserPlus
+} from 'react-icons/fi';
+import { useAuth } from '../context/AuthContext';
 
 // Move to styles/NavbarStyles.js
 const NavBar = styled.nav`
@@ -150,13 +159,20 @@ const Navbar = () => {
   const cartItems = useSelector(state => state.handleCart ?? []);
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const { isAuthenticated, currentUser, logout } = useAuth();
 
   const navLinks = useMemo(() => [
     { to: "/", text: "Home" },
     { to: "/products", text: "Shop" },
     { to: "/about", text: "Story" },
     { to: "/contact", text: "Contact" },
-  ], []);
+    ...(isAuthenticated ? [{ to: "/dashboard", text: "Dashboard" }] : []),
+  ], [isAuthenticated]);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
@@ -191,14 +207,50 @@ const Navbar = () => {
           </ul>
 
           <div className="d-flex align-items-center gap-3">
-            <NavButton
-              onClick={() => navigate('/login')}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FiLogIn size={18} />
-              Login
-            </NavButton>
+            {isAuthenticated ? (
+              <>
+                <NavButton
+                  onClick={() => navigate('/dashboard')}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="d-flex align-items-center gap-2"
+                >
+                  <FiUser size={18} />
+                  {currentUser?.name || 'Profile'}
+                </NavButton>
+                <NavButton
+                  onClick={handleLogout}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="d-flex align-items-center gap-2"
+                >
+                  <FiLogOut size={18} />
+                  Logout
+                </NavButton>
+              </>
+            ) : (
+              <>
+                <NavButton
+                  onClick={() => navigate('/register')}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="d-flex align-items-center gap-2"
+                  variant="outline"
+                >
+                  <FiUserPlus size={18} />
+                  Register
+                </NavButton>
+                <NavButton
+                  onClick={() => navigate('/login')}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="d-flex align-items-center gap-2"
+                >
+                  <FiLogIn size={18} />
+                  Login
+                </NavButton>
+              </>
+            )}
 
             <NavButton
               onClick={() => navigate('/cart')}

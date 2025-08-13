@@ -1,24 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Footer, Navbar } from "../components"; // Fixed path
+import { Footer, Navbar } from "../components";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase";
-
-const loginUser = async (email, password) => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-    return { success: true, token: user.accessToken, user: { email: user.email, uid: user.uid } };
-  } catch (error) {
-    throw new Error(error.message || "Login failed. Please check your credentials.");
-  }
-};
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [status, setStatus] = useState({ loading: false, error: null, success: false });
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -45,11 +35,10 @@ const Login = () => {
     }
 
     try {
-      const result = await loginUser(formData.email, formData.password);
+      await login({ email: formData.email, password: formData.password });
       setStatus({ loading: false, error: null, success: true });
-      localStorage.setItem("token", result.token);
-      localStorage.setItem("user", JSON.stringify(result.user));
-      setTimeout(() => navigate("/dashboard"), 1000);
+      // Redirect to home or dashboard after successful login
+      navigate("/" || "/dashboard");
     } catch (error) {
       setStatus({ loading: false, error: error.message, success: false });
     }
