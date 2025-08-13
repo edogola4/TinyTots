@@ -45,9 +45,14 @@ const Cart = () => {
   }, [dispatch]);
 
   const removeItem = useCallback((product) => {
-    dispatch(delCart(product.id));
+    dispatch(delCart(product));
     if (product.qty === 1) {
       toast.info(`Removed ${product.title} from cart`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    } else {
+      toast.info(`Decreased quantity of ${product.title}`, {
         position: "top-right",
         autoClose: 2000,
       });
