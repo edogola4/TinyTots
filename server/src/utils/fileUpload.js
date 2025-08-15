@@ -1,30 +1,21 @@
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs');
-const ErrorResponse = require('./errorResponse');
 
-// Create uploads directory if it doesn't exist
-const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-// Set up storage engine
+// Set storage engine
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadDir);
+  destination: (req, file, cb) => {
+    cb(null, process.env.FILE_UPLOAD_PATH || './public/uploads/');
   },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`
-    );
-  },
+  filename: (req, file, cb) => {
+    // Create unique filename
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+  }
 });
 
 // Check file type
-function checkFileType(file, cb) {
-  // Allowed extensions
+const checkFileType = (file, cb) => {
+  // Allowed file extensions
   const filetypes = /jpeg|jpg|png|gif|webp/;
   
   // Check extension
@@ -32,67 +23,23 @@ function checkFileType(file, cb) {
   
   // Check mime type
   const mimetype = filetypes.test(file.mimetype);
-
+  
   if (mimetype && extname) {
     return cb(null, true);
   } else {
-    cb(new ErrorResponse('Images only! (jpeg, jpg, png, gif, webp)', 400));
+    cb(new Error('Images only! (jpeg, jpg, png, gif, webp)'));
   }
-}
+};
 
 // Initialize upload
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: process.env.MAX_FILE_UPLOAD || 1000000, // 1MB default
+    fileSize: process.env.MAX_FILE_UPLOAD || 1000000 // 1MB default
   },
-  fileFilter: function (req, file, cb) {
+  fileFilter: (req, file, cb) => {
     checkFileType(file, cb);
-  },
+  }
 });
 
-// Single file upload middleware
-const uploadFile = (fieldName) => {
-  return (req, res, next) => {
-    const uploadSingle = upload.single(fieldName);
-    
-    uploadSingle(req, res, function (err) {
-      if (err instanceof multer.MulterError) {
-        // A Multer error occurred when uploading
-        return next(new ErrorResponse(err.message, 400));
-      } else if (err) {
-        // An unknown error occurred
-        return next(err);
-      }
-      
-      // Everything went fine
-      next();
-    });
-  };
-};
-
-// Multiple file upload middleware
-const uploadFiles = (fieldName, maxCount = 5) => {
-  return (req, res, next) => {
-    const uploadMultiple = upload.array(fieldName, maxCount);
-    
-    uploadMultiple(req, res, function (err) {
-      if (err instanceof multer.MulterError) {
-        // A Multer error occurred when uploading
-        return next(new ErrorResponse(err.message, 400));
-      } else if (err) {
-        // An unknown error occurred
-        return next(err);
-      }
-      
-      // Everything went fine
-      next();
-    });
-  };
-};
-
-module.exports = {
-  upload,
-  uploadFile,
-  uploadFiles,
-};
+module.exports = { upload };

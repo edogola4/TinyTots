@@ -1,220 +1,202 @@
 const mongoose = require('mongoose');
 
-const orderItemSchema = new mongoose.Schema({
-  product: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Product',
-    required: true
-  },
-  name: {
-    type: String,
-    required: true
-  },
-  image: {
-    type: String,
-    required: true
-  },
-  price: {
-    type: Number,
-    required: true,
-    min: 0
-  },
-  quantity: {
-    type: Number,
-    required: true,
-    min: 1,
-    default: 1
-  },
-  attributes: {
-    type: Map,
-    of: String,
-    default: {}
-  }
-});
-
-const shippingAddressSchema = new mongoose.Schema({
-  fullName: {
-    type: String,
-    required: [true, 'Please provide a full name'],
-    trim: true
-  },
-  address: {
-    type: String,
-    required: [true, 'Please provide an address'],
-    trim: true
-  },
-  city: {
-    type: String,
-    required: [true, 'Please provide a city'],
-    trim: true
-  },
-  postalCode: {
-    type: String,
-    required: [true, 'Please provide a postal code'],
-    trim: true
-  },
-  country: {
-    type: String,
-    required: [true, 'Please provide a country'],
-    trim: true
-  },
-  phone: {
-    type: String,
-    required: [true, 'Please provide a phone number'],
-    trim: true
-  }
-});
-
-const paymentResultSchema = new mongoose.Schema({
-  id: String,
-  status: String,
-  update_time: String,
-  email_address: String
-});
-
-const orderSchema = new mongoose.Schema({
+const OrderSchema = new mongoose.Schema({
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.ObjectId,
     ref: 'User',
     required: true
   },
-  orderItems: [orderItemSchema],
-  shippingAddress: shippingAddressSchema,
+  orderItems: [{
+    name: { type: String, required: true },
+    quantity: { type: Number, required: true, min: 1 },
+    image: { type: String, required: true },
+    price: { type: Number, required: true, min: 0 },
+    product: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Product',
+      required: true
+    }
+  }],
+  shippingAddress: {
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    address: { type: String, required: true },
+    city: { type: String, required: true },
+    postalCode: { type: String, required: true },
+    country: { type: String, required: true, default: 'Kenya' },
+    phone: String
+  },
   paymentMethod: {
     type: String,
     required: true,
-    enum: ['stripe', 'paypal', 'cod'],
-    default: 'cod'
+    enum: ['PayPal', 'Stripe', 'M-Pesa', 'Cash on Delivery', 'Bank Transfer']
   },
-  paymentResult: paymentResultSchema,
+  paymentResult: {
+    id: String,
+    status: String,
+    update_time: String,
+    email_address: String
+  },
   itemsPrice: {
     type: Number,
     required: true,
-    default: 0.0
+    default: 0.0,
+    min: 0
   },
   taxPrice: {
     type: Number,
     required: true,
-    default: 0.0
+    default: 0.0,
+    min: 0
   },
   shippingPrice: {
     type: Number,
     required: true,
-    default: 0.0
+    default: 0.0,
+    min: 0
   },
   totalPrice: {
     type: Number,
     required: true,
-    default: 0.0
+    default: 0.0,
+    min: 0
   },
+  discount: {
+    type: Number,
+    default: 0.0,
+    min: 0
+  },
+  couponCode: String,
   isPaid: {
     type: Boolean,
     required: true,
     default: false
   },
-  paidAt: {
-    type: Date
-  },
+  paidAt: Date,
   isDelivered: {
     type: Boolean,
     required: true,
     default: false
   },
-  deliveredAt: {
-    type: Date
-  },
+  deliveredAt: Date,
   status: {
     type: String,
-    enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'],
+    required: true,
+    enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled', 'refunded', 'completed'],
     default: 'pending'
   },
+  trackingNumber: String,
+  carrier: String,
+  estimatedDelivery: Date,
+  notes: String,
   orderNumber: {
     type: String,
-    unique: true,
-    required: true
+    unique: true
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
 });
 
 // Generate order number before saving
-orderSchema.pre('save', async function(next) {
-  if (this.isNew) {
-    const count = await this.constructor.countDocuments();
-    this.orderNumber = `ORD-${Date.now()}-${count + 1}`;
+OrderSchema.pre('save', function(next) {
+  if (!this.orderNumber) {
+    const timestamp = Date.now().toString();
+    const random = Math.random().toString(36).substring(2, 8).toUpperCase();
+    this.orderNumber = `TT${timestamp.slice(-6)}${random}`;
   }
   next();
 });
 
-// Update product stock when order is created
-orderSchema.post('save', async function(doc) {
-  if (doc.orderItems && doc.orderItems.length > 0) {
-    for (const item of doc.orderItems) {
-      await mongoose.model('Product').updateOne(
-        { _id: item.product },
-        { $inc: { stock: -item.quantity } }
-      );
-    }
-  }
+// Calculate total price before saving
+OrderSchema.pre('save', function(next) {
+  // Calculate items price
+  this.itemsPrice = this.orderItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  
+  // Calculate total price (items + tax + shipping - discount)
+  this.totalPrice = this.itemsPrice + this.taxPrice + this.shippingPrice - this.discount;
+  
+  next();
 });
 
-// Update product stock if order is cancelled
-orderSchema.pre('findOneAndUpdate', async function() {
-  const docToUpdate = await this.model.findOne(this.getQuery());
-  
-  if (docToUpdate && this._update.status === 'cancelled' && docToUpdate.status !== 'cancelled') {
-    for (const item of docToUpdate.orderItems) {
-      await mongoose.model('Product').updateOne(
-        { _id: item.product },
-        { $inc: { stock: item.quantity } }
-      );
-    }
-  }
+// Virtual for order age in days
+OrderSchema.virtual('orderAge').get(function() {
+  return Math.floor((Date.now() - this.createdAt.getTime()) / (1000 * 60 * 60 * 24));
 });
 
-// Add text index for search
-orderSchema.index(
-  { 
-    'orderNumber': 'text',
-    'shippingAddress.fullName': 'text',
-    'shippingAddress.email': 'text',
-    'user': 'text'
-  },
-  {
-    weights: {
-      'orderNumber': 5,
-      'shippingAddress.fullName': 3,
-      'shippingAddress.email': 3,
-      'user': 2
-    }
-  }
-);
+// Virtual for total items count
+OrderSchema.virtual('totalItems').get(function() {
+  return this.orderItems.reduce((acc, item) => acc + item.quantity, 0);
+});
 
-// Static method to get monthly sales
-orderSchema.statics.getMonthlySales = async function() {
-  const currentYear = new Date().getFullYear();
-  
+// Virtual for full customer name
+OrderSchema.virtual('customerName').get(function() {
+  return `${this.shippingAddress.firstName} ${this.shippingAddress.lastName}`;
+});
+
+// Virtual for order status display
+OrderSchema.virtual('statusDisplay').get(function() {
+  const statusMap = {
+    pending: 'Pending',
+    processing: 'Processing',
+    shipped: 'Shipped',
+    delivered: 'Delivered',
+    cancelled: 'Cancelled',
+    refunded: 'Refunded',
+    completed: 'Completed'
+  };
+  return statusMap[this.status] || this.status;
+});
+
+// Instance method to mark as paid
+OrderSchema.methods.markAsPaid = function() {
+  this.isPaid = true;
+  this.paidAt = Date.now();
+  return this.save();
+};
+
+// Instance method to mark as delivered
+OrderSchema.methods.markAsDelivered = function() {
+  this.isDelivered = true;
+  this.deliveredAt = Date.now();
+  this.status = 'delivered';
+  return this.save();
+};
+
+// Instance method to cancel order
+OrderSchema.methods.cancelOrder = function(reason = '') {
+  this.status = 'cancelled';
+  this.notes = reason;
+  return this.save();
+};
+
+// Static method to get order statistics
+OrderSchema.statics.getOrderStats = function() {
   return this.aggregate([
     {
-      $match: {
-        isPaid: true,
-        createdAt: {
-          $gte: new Date(`${currentYear}-01-01`),
-          $lte: new Date(`${currentYear}-12-31`)
-        }
-      }
-    },
-    {
       $group: {
-        _id: { $month: '$createdAt' },
-        totalSales: { $sum: '$totalPrice' },
-        orderCount: { $sum: 1 }
+        _id: '$status',
+        count: { $sum: 1 },
+        totalValue: { $sum: '$totalPrice' }
       }
     },
     {
-      $sort: { '_id': 1 }
+      $project: {
+        status: '$_id',
+        count: 1,
+        totalValue: 1,
+        _id: 0
+      }
     }
   ]);
 };
 
-module.exports = mongoose.model('Order', orderSchema);
+// Indexes for better query performance
+OrderSchema.index({ user: 1, createdAt: -1 });
+OrderSchema.index({ status: 1 });
+OrderSchema.index({ orderNumber: 1 });
+OrderSchema.index({ 'paymentResult.id': 1 });
+OrderSchema.index({ createdAt: -1 });
+
+module.exports = mongoose.model('Order', OrderSchema);

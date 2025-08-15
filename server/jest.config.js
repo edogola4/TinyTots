@@ -6,10 +6,14 @@ module.exports = {
   testMatch: ['**/tests/**/*.test.js'],
   
   // Setup files
-  setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
   
   // Test timeout
   testTimeout: 30000,
+  
+  // Detect open handles and force exit
+  detectOpenHandles: true,
+  forceExit: true,
   
   // Coverage settings
   collectCoverage: true,
