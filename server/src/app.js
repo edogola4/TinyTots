@@ -91,7 +91,7 @@ app.get('/', (req, res) => {
   res.json({
     status: 'success',
     message: 'Welcome to TinyTots API',
-    documentation: 'https://github.com/yourusername/tinytots-api#readme',
+    documentation: 'https://github.com/edogola4/tinytots-api#readme',
     version: '1.0.0',
   });
 });

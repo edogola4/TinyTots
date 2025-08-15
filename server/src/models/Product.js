@@ -1,18 +1,14 @@
 const mongoose = require('mongoose');
+const slugify = require('slugify');
 
-const productSchema = new mongoose.Schema({
+const ProductSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please add a product name'],
     trim: true,
-    maxlength: [100, 'Name cannot be more than 100 characters']
+    maxlength: [100, 'Product name cannot be more than 100 characters']
   },
-  slug: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true
-  },
+  slug: String,
   description: {
     type: String,
     required: [true, 'Please add a description'],
@@ -21,55 +17,88 @@ const productSchema = new mongoose.Schema({
   price: {
     type: Number,
     required: [true, 'Please add a price'],
-    min: [0, 'Price must be a positive number']
+    min: [0, 'Price cannot be negative']
   },
-  originalPrice: {
+  comparePrice: {
     type: Number,
-    min: [0, 'Original price must be a positive number']
+    min: [0, 'Compare price cannot be negative']
   },
   category: {
     type: String,
     required: [true, 'Please add a category'],
     enum: [
-      'clothing',
-      'shoes',
-      'accessories',
-      'toys',
-      'baby-care',
-      'nursery',
-      'feeding',
-      'bath',
-      'safety',
-      'other'
+      'Clothing',
+      'Toys',
+      'Books',
+      'Shoes',
+      'Accessories',
+      'Feeding',
+      'Diapering',
+      'Bath & Body',
+      'Nursery',
+      'Gear',
+      'Other'
     ]
   },
   subcategory: {
     type: String,
-    required: [true, 'Please add a subcategory']
+    maxlength: [50, 'Subcategory cannot be more than 50 characters']
   },
-  images: {
-    type: [String],
-    required: [true, 'Please add at least one image']
-  },
-  stock: {
-    type: Number,
-    required: [true, 'Please add stock quantity'],
-    min: [0, 'Stock cannot be negative'],
-    default: 0
+  brand: {
+    type: String,
+    maxlength: [50, 'Brand cannot be more than 50 characters']
   },
   sku: {
     type: String,
-    required: [true, 'Please add a SKU'],
     unique: true,
-    uppercase: true
+    sparse: true
   },
-  rating: {
+  countInStock: {
     type: Number,
-    min: [0, 'Rating must be at least 0'],
-    max: [5, 'Rating cannot be more than 5'],
+    required: [true, 'Please add quantity in stock'],
+    min: [0, 'Stock cannot be negative'],
     default: 0
   },
-  numReviews: {
+  lowStockLevel: {
+    type: Number,
+    default: 5
+  },
+  weight: {
+    type: Number,
+    min: [0, 'Weight cannot be negative']
+  },
+  dimensions: {
+    length: Number,
+    width: Number,
+    height: Number
+  },
+  colors: [{
+    name: String,
+    hexCode: String
+  }],
+  sizes: [{
+    type: String,
+    enum: ['XS', 'S', 'M', 'L', 'XL', 'XXL', '0-3M', '3-6M', '6-9M', '9-12M', '12-18M', '18-24M', '2T', '3T', '4T', '5T']
+  }],
+  images: [{
+    url: String,
+    alt: String,
+    isPrimary: {
+      type: Boolean,
+      default: false
+    }
+  }],
+  photo: {
+    type: String,
+    default: 'no-photo.jpg'
+  },
+  averageRating: {
+    type: Number,
+    min: [1, 'Rating must be at least 1'],
+    max: [5, 'Rating must can not be more than 5'],
+    default: 0
+  },
+  ratingsQuantity: {
     type: Number,
     default: 0
   },
@@ -77,14 +106,35 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  active: {
+  onSale: {
+    type: Boolean,
+    default: false
+  },
+  saleStartDate: Date,
+  saleEndDate: Date,
+  tags: [String],
+  metaTitle: String,
+  metaDescription: String,
+  isActive: {
     type: Boolean,
     default: true
   },
-  attributes: {
-    type: Map,
-    of: [String],
-    default: {}
+  ageRange: {
+    min: {
+      type: Number,
+      min: 0
+    },
+    max: {
+      type: Number,
+      min: 0
+    }
+  },
+  material: String,
+  careInstructions: String,
+  warnings: String,
+  vendor: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
   }
 }, {
   timestamps: true,
@@ -92,74 +142,63 @@ const productSchema = new mongoose.Schema({
   toObject: { virtuals: true }
 });
 
-// Create product slug from name
-productSchema.pre('save', function(next) {
-  if (this.isModified('name')) {
-    this.slug = this.name
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, '') // remove invalid chars
-      .replace(/\s+/g, '-') // replace spaces with -
-      .replace(/--+/g, '-') // replace multiple - with single -
-      .trim() // trim - from start and end
-      .replace(/^-+|-+$/g, '');
+// Create product slug from the name
+ProductSchema.pre('save', function(next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
+});
+
+// Generate SKU if not provided
+ProductSchema.pre('save', function(next) {
+  if (!this.sku) {
+    this.sku = this.category.substring(0, 3).toUpperCase() + 
+               Date.now().toString().slice(-6) + 
+               Math.random().toString(36).substring(2, 5).toUpperCase();
   }
   next();
 });
 
-// Reverse populate with virtuals
-productSchema.virtual('reviews', {
+// Calculate if product is on sale
+ProductSchema.virtual('isOnSale').get(function() {
+  if (!this.onSale) return false;
+  
+  const now = new Date();
+  if (this.saleStartDate && now < this.saleStartDate) return false;
+  if (this.saleEndDate && now > this.saleEndDate) return false;
+  
+  return true;
+});
+
+// Calculate discount percentage
+ProductSchema.virtual('discountPercent').get(function() {
+  if (!this.comparePrice || this.comparePrice <= this.price) return 0;
+  return Math.round(((this.comparePrice - this.price) / this.comparePrice) * 100);
+});
+
+// Check if product is in stock
+ProductSchema.virtual('inStock').get(function() {
+  return this.countInStock > 0;
+});
+
+// Check if stock is low
+ProductSchema.virtual('lowStock').get(function() {
+  return this.countInStock <= this.lowStockLevel && this.countInStock > 0;
+});
+
+// Virtual for reviews
+ProductSchema.virtual('reviews', {
   ref: 'Review',
   localField: '_id',
   foreignField: 'product',
   justOne: false
 });
 
-// Cascade delete reviews when a product is deleted
-productSchema.pre('remove', async function(next) {
-  await this.model('Review').deleteMany({ product: this._id });
-  next();
-});
+// Indexes for better query performance
+ProductSchema.index({ name: 'text', description: 'text' });
+ProductSchema.index({ category: 1, subcategory: 1 });
+ProductSchema.index({ price: 1 });
+ProductSchema.index({ averageRating: -1 });
+ProductSchema.index({ featured: 1 });
+ProductSchema.index({ createdAt: -1 });
 
-// Create text index for search
-productSchema.index({ 
-  name: 'text',
-  description: 'text',
-  category: 'text',
-  subcategory: 'text',
-  sku: 'text'
-}, {
-  weights: {
-    name: 5,
-    sku: 5,
-    subcategory: 3,
-    category: 2,
-    description: 1
-  }
-});
-
-// Static method to get average rating
-productSchema.statics.getAverageRating = async function(productId) {
-  const obj = await this.model('Review').aggregate([
-    {
-      $match: { product: productId }
-    },
-    {
-      $group: {
-        _id: '$product',
-        averageRating: { $avg: '$rating' },
-        numReviews: { $sum: 1 }
-      }
-    }
-  ]);
-
-  try {
-    await this.model('Product').findByIdAndUpdate(productId, {
-      rating: obj[0] ? obj[0].averageRating : 0,
-      numReviews: obj[0] ? obj[0].numReviews : 0
-    });
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-module.exports = mongoose.model('Product', productSchema);
+module.exports = mongoose.model('Product', ProductSchema);

@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please add a name'],
@@ -17,35 +19,128 @@ const userSchema = new mongoose.Schema({
       'Please add a valid email'
     ]
   },
+  role: {
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user'
+  },
   password: {
     type: String,
     required: [true, 'Please add a password'],
     minlength: 6,
     select: false
   },
-  role: {
+  phone: {
     type: String,
-    enum: ['user', 'admin'],
-    default: 'user'
+    maxlength: [20, 'Phone number cannot be longer than 20 characters']
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
+  address: {
+    street: String,
+    city: String,
+    state: String,
+    zipcode: String,
+    country: {
+      type: String,
+      default: 'Kenya'
+    }
+  },
+  avatar: {
+    type: String,
+    default: 'no-photo.jpg'
+  },
+  isEmailVerified: {
+    type: Boolean,
+    default: false
+  },
+  emailVerificationToken: String,
+  resetPasswordToken: String,
+  resetPasswordExpire: Date,
+  twoFactorCode: String,
+  twoFactorCodeExpire: Date,
+  twoFactorEnable: {
+    type: Boolean,
+    default: false
+  },
+  active: {
+    type: Boolean,
+    default: true,
+    select: false
   }
+}, {
+  timestamps: true,
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
 });
 
 // Encrypt password using bcrypt
-userSchema.pre('save', async function(next) {
+UserSchema.pre('save', async function(next) {
   if (!this.isModified('password')) {
     next();
   }
+
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
 
+// Sign JWT and return
+UserSchema.methods.getSignedJwtToken = function() {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE
+  });
+};
+
 // Match user entered password to hashed password in database
-userSchema.methods.matchPassword = async function(enteredPassword) {
+UserSchema.methods.matchPassword = async function(enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-module.exports = mongoose.model('User', userSchema);
+// Generate and hash password token
+UserSchema.methods.getResetPasswordToken = function() {
+  // Generate token
+  const resetToken = crypto.randomBytes(20).toString('hex');
+
+  // Hash token and set to resetPasswordToken field
+  this.resetPasswordToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+
+  // Set expire
+  this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
+
+  return resetToken;
+};
+
+// Generate email verify token
+UserSchema.methods.generateEmailVerifyToken = function() {
+  // Generate token
+  const verifyToken = crypto.randomBytes(20).toString('hex');
+
+  // Hash token and set to emailVerificationToken field
+  this.emailVerificationToken = crypto
+    .createHash('sha256')
+    .update(verifyToken)
+    .digest('hex');
+
+  return verifyToken;
+};
+
+// Virtual for user's orders
+UserSchema.virtual('orders', {
+  ref: 'Order',
+  localField: '_id',
+  foreignField: 'user',
+  justOne: false
+});
+
+// Remove password from output
+UserSchema.methods.toJSON = function() {
+  const userObject = this.toObject();
+  delete userObject.password;
+  delete userObject.resetPasswordToken;
+  delete userObject.resetPasswordExpire;
+  delete userObject.emailVerificationToken;
+  return userObject;
+};
+
+module.exports = mongoose.model('User', UserSchema);
