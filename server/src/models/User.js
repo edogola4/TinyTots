@@ -3,6 +3,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 
+// Import UserRole model
+const UserRole = require('./UserRole');
+
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -20,9 +23,28 @@ const UserSchema = new mongoose.Schema({
     ]
   },
   role: {
-    type: String,
-    enum: ['user', 'admin'],
-    default: 'user'
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'UserRole',
+    required: true,
+    default: async function() {
+      // Default to 'viewer' role
+      const defaultRole = await UserRole.findOne({ name: 'viewer' });
+      return defaultRole ? defaultRole._id : null;
+    },
+    validate: {
+      validator: async function(roleId) {
+        if (!roleId) return false;
+        const role = await UserRole.findById(roleId);
+        return !!role;
+      },
+      message: 'Invalid role ID'
+    }
+  },
+  permissions: {
+    // This will be populated based on the assigned role
+    type: Map,
+    of: Boolean,
+    default: {}
   },
   password: {
     type: String,
@@ -93,6 +115,36 @@ UserSchema.methods.getSignedJwtToken = function() {
 UserSchema.methods.matchPassword = async function(enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
+
+// Check if user has specific permission
+UserSchema.methods.hasPermission = function(permission) {
+  return this.permissions.get(permission) === true;
+};
+
+// Check if user has any of the specified permissions
+UserSchema.methods.hasAnyPermission = function(permissions) {
+  return permissions.some(permission => this.permissions.get(permission) === true);
+};
+
+// Check if user has all of the specified permissions
+UserSchema.methods.hasAllPermissions = function(permissions) {
+  return permissions.every(permission => this.permissions.get(permission) === true);
+};
+
+// Middleware to update user permissions when role changes
+UserSchema.pre('save', async function(next) {
+  if (this.isModified('role') || this.isNew) {
+    try {
+      const role = await UserRole.findById(this.role);
+      if (role) {
+        this.permissions = role.permissions;
+      }
+    } catch (error) {
+      console.error('Error updating user permissions:', error);
+    }
+  }
+  next();
+});
 
 // Generate and hash password token
 UserSchema.methods.getResetPasswordToken = function() {

@@ -19,6 +19,7 @@ const errorHandler = require('./middleware/error');
 // Route files
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
+const roleRoutes = require('./routes/roles');
 
 // Create Express app
 const app = express();
@@ -85,6 +86,7 @@ app.use((req, res, next) => {
 // Mount routers
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/admin', adminRoutes);
+app.use('/api/v1/roles', roleRoutes);
 
 // Basic route
 app.get('/', (req, res) => {
