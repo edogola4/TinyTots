@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const userRoleSchema = new mongoose.Schema(
   {
@@ -115,4 +115,4 @@ userRoleSchema.statics.initializeRoles = async function () {
 
 const UserRole = mongoose.model('UserRole', userRoleSchema);
 
-export default UserRole;
+module.exports = UserRole;

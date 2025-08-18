@@ -1,19 +1,34 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const UserRole = require('../models/UserRole');
+const ErrorResponse = require('../utils/errorResponse');
 
 // @desc    Register user
 // @route   POST /api/auth/register
 // @access  Public
 exports.register = async (req, res, next) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password } = req.body;
+    
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return next(new ErrorResponse('User already exists with this email', 400));
+    }
 
-    // Create user
+    // Find the default viewer role
+    const defaultRole = await UserRole.findOne({ name: 'viewer' });
+    
+    if (!defaultRole) {
+      return next(new ErrorResponse('Default role not found in the system', 500));
+    }
+
+    // Create user with default viewer role
     const user = await User.create({
       name,
       email,
       password,
-      role
+      role: defaultRole._id  // Assign default viewer role
     });
 
     // Create token
