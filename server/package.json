@@ -48,7 +48,7 @@
     "hpp": "^0.2.3",
     "jest": "^29.5.0",
     "jest-watch-typeahead": "^2.2.2",
-    "mongodb-memory-server": "^10.2.0",
+    "mongodb-memory-server": "^7.3.0",
     "morgan": "^1.10.1",
     "nodemon": "^3.1.10",
     "supertest": "^6.3.3",

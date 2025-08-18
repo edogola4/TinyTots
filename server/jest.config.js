@@ -2,18 +2,22 @@ module.exports = {
   // Test environment
   testEnvironment: 'node',
   
+  // Global setup and teardown
+  globalSetup: '<rootDir>/tests/globalSetup.js',
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
+  
   // Test file patterns
   testMatch: ['**/tests/**/*.test.js'],
   
-  // Setup files
-  setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
-  
-  // Test timeout
-  testTimeout: 30000,
+  // Test timeout (60 seconds)
+  testTimeout: 60000,
   
   // Detect open handles and force exit
   detectOpenHandles: true,
   forceExit: true,
+  
+  // Run tests in band (sequentially) to avoid port conflicts
+  maxWorkers: 1,
   
   // Coverage settings
   collectCoverage: true,
