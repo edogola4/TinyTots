@@ -31,14 +31,18 @@ const Register = () => {
     }
 
     try {
-      await register({
+      console.log('Attempting to register with:', formData);
+      const response = await register({
         name: formData.name,
         email: formData.email,
         password: formData.password,
       });
-      navigate('/admin');
+      console.log('Registration response:', response);
+      navigate('/');
     } catch (err) {
-      setError(err || 'Failed to create an account');
+      console.error('Registration error:', err);
+      const errorMessage = err.response?.data?.message || err.message || 'Failed to create an account';
+      setError(errorMessage);
     }
   };
 

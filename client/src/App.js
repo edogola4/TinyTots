@@ -7,6 +7,7 @@ import { AppThemeProvider } from './theme/ThemeProvider';
 
 // Lazy load components
 const Login = React.lazy(() => import('./pages/Login'));
+const Register = React.lazy(() => import('./pages/Register'));
 const AdminLayout = React.lazy(() => import('./layouts/AdminLayout'));
 const Dashboard = React.lazy(() => import('./pages/Admin/Dashboard'));
 const Users = React.lazy(() => import('./pages/Admin/Users'));
@@ -59,6 +60,11 @@ const AppContent = () => (
           <Route path="/login" element={
             <Suspense fallback={<Loader />}>
               <Login />
+            </Suspense>
+          } />
+          <Route path="/register" element={
+            <Suspense fallback={<Loader />}>
+              <Register />
             </Suspense>
           } />
           

@@ -30,13 +30,24 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       setError(null);
+      setLoading(true);
       const data = await loginService(email, password);
       localStorage.setItem('token', data.token);
-      setUser(data.user);
+      // Set the user data from the login response
+      if (data.user) {
+        setUser(data.user);
+      } else {
+        // If user data isn't in the response, fetch it
+        const userData = await getCurrentUser();
+        setUser(userData);
+      }
       return data;
     } catch (error) {
+      console.error('Login error in AuthContext:', error);
       setError(error);
       throw error;
+    } finally {
+      setLoading(false);
     }
   };
 

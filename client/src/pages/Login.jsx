@@ -22,11 +22,16 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    console.log('Attempting to login with:', formData.email);
     try {
-      await login(formData.email, formData.password);
-      navigate('/admin');
+      const result = await login(formData.email, formData.password);
+      console.log('Login successful, complete response:', result);
+      
+      // Force a page reload to ensure all auth state is properly initialized
+      window.location.href = '/';
     } catch (err) {
-      setError(err || 'Failed to log in');
+      console.error('Login error:', err);
+      setError(err.message || 'Failed to log in');
     }
   };
 
