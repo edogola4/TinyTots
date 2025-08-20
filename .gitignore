@@ -11,6 +11,10 @@
 # production
 /build
 
+# MongoDB
+/mongodb-macos-x86_64-6.0.14/data/
+/mongodb-macos-x86_64-6.0.14/log/
+
 # misc
 .DS_Store
 .env.local
