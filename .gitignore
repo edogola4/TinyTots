@@ -27,3 +27,13 @@ yarn-debug.log*
 yarn-error.log*
 .env
 .env
+# Ignore MongoDB database files
+data/
+log/
+*.log
+
+# Ignore MongoDB installation files
+mongodb-macos-*/
+
+# Ignore local system files
+.DS_Store
