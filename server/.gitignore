@@ -142,3 +142,13 @@ public
 # Ignore MongoDB binaries
 mongodb-macos-*
 *.tgz
+# Ignore MongoDB database files
+data/
+log/
+*.log
+
+# Ignore MongoDB installation files
+mongodb-macos-*/
+
+# Ignore local system files
+.DS_Store
