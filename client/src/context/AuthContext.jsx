@@ -31,19 +31,29 @@ export const AuthProvider = ({ children }) => {
     try {
       setError(null);
       setLoading(true);
+      console.log('AuthContext: Attempting to login with:', email);
       const data = await loginService(email, password);
-      localStorage.setItem('token', data.token);
-      // Set the user data from the login response
-      if (data.user) {
-        setUser(data.user);
-      } else {
-        // If user data isn't in the response, fetch it
-        const userData = await getCurrentUser();
-        setUser(userData);
+      console.log('AuthContext: Login response received:', data);
+      
+      if (!data || !data.token) {
+        throw new Error('No token received from server');
       }
-      return data;
+      
+      localStorage.setItem('token', data.token);
+      
+      // Always fetch fresh user data after login to ensure consistency
+      const userData = await getCurrentUser();
+      console.log('AuthContext: Fetched user data:', userData);
+      
+      if (!userData) {
+        throw new Error('Failed to load user data');
+      }
+      
+      setUser(userData);
+      return { ...data, user: userData }; // Ensure user data is included in the response
     } catch (error) {
-      console.error('Login error in AuthContext:', error);
+      console.error('AuthContext: Login error:', error);
+      localStorage.removeItem('token'); // Clear invalid token
       setError(error);
       throw error;
     } finally {

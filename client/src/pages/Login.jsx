@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { TextField, Button, Container, Typography, Box, Paper, Link as MuiLink } from '@mui/material';
 
@@ -9,8 +9,18 @@ const Login = () => {
     password: '',
   });
   const [error, setError] = useState('');
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (user) {
+      const redirectPath = user.role === 'admin' ? '/admin/dashboard' : '/';
+      navigate(redirectPath, { replace: true });
+    }
+  }, [user, navigate]);
 
   const handleChange = (e) => {
     setFormData({
@@ -24,11 +34,8 @@ const Login = () => {
     setError('');
     console.log('Attempting to login with:', formData.email);
     try {
-      const result = await login(formData.email, formData.password);
-      console.log('Login successful, complete response:', result);
-      
-      // Force a page reload to ensure all auth state is properly initialized
-      window.location.href = '/';
+      await login(formData.email, formData.password);
+      // The useEffect will handle the redirection based on the user state
     } catch (err) {
       console.error('Login error:', err);
       setError(err.message || 'Failed to log in');

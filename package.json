@@ -16,6 +16,7 @@
     "framer-motion": "^12.16.0",
     "immer": "^10.1.1",
     "lucide-react": "^0.513.0",
+    "mongodb": "^6.18.0",
     "mongoose": "^8.17.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -95,14 +95,20 @@ exports.login = async (req, res, next) => {
       { expiresIn: process.env.JWT_EXPIRE || '30d' }
     );
 
+    // Get user data without password and populate role
+    const userData = await User.findById(user._id)
+      .select('-password')
+      .populate('role', 'name')
+      .lean();
+
     res.status(200).json({
       success: true,
       token,
       user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role
+        id: userData._id,
+        name: userData.name,
+        email: userData.email,
+        role: userData.role?.name || 'viewer'
       }
     });
   } catch (err) {

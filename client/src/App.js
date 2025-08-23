@@ -8,6 +8,7 @@ import { AppThemeProvider } from './theme/ThemeProvider';
 // Lazy load components
 const Login = React.lazy(() => import('./pages/Login'));
 const Register = React.lazy(() => import('./pages/Register'));
+const Home = React.lazy(() => import('./pages/Home'));
 const AdminLayout = React.lazy(() => import('./layouts/AdminLayout'));
 const Dashboard = React.lazy(() => import('./pages/Admin/Dashboard'));
 const Users = React.lazy(() => import('./pages/Admin/Users'));
@@ -33,19 +34,21 @@ const Loader = () => (
 
 // Protected route component
 const ProtectedRoute = ({ children, requiredRoles = [] }) => {
-  const { currentUser, loading } = useAuth();
+  const { user, loading } = useAuth();
   
   if (loading) {
     return <Loader />;
   }
 
-  if (!currentUser) {
-    return <Navigate to="/login" replace />;
+  if (!user) {
+    return <Navigate to="/login" state={{ from: window.location.pathname }} replace />;
   }
 
   // Check if user has required role
-  if (requiredRoles.length > 0 && !requiredRoles.includes(currentUser.role)) {
-    return <Navigate to="/unauthorized" replace />;
+  if (requiredRoles.length > 0 && !requiredRoles.includes(user.role)) {
+    // If user is not authorized, redirect to home or dashboard based on role
+    const redirectPath = user.role === 'admin' ? '/admin/dashboard' : '/';
+    return <Navigate to={redirectPath} replace />;
   }
 
   return children;
@@ -68,7 +71,15 @@ const AppContent = () => (
             </Suspense>
           } />
           
+          {/* Public routes */}
           <Route path="/" element={
+            <Suspense fallback={<Loader />}>
+              <Home />
+            </Suspense>
+          } />
+          
+          {/* Admin routes */}
+          <Route path="/admin" element={
             <ProtectedRoute>
               <Suspense fallback={<Loader />}>
                 <AdminLayout />
@@ -76,6 +87,11 @@ const AppContent = () => (
             </ProtectedRoute>
           }>
             <Route index element={
+              <Suspense fallback={<Loader />}>
+                <Dashboard />
+              </Suspense>
+            } />
+            <Route path="dashboard" element={
               <Suspense fallback={<Loader />}>
                 <Dashboard />
               </Suspense>
